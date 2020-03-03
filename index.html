@@ -49,13 +49,16 @@
         height="100%"
       >
         <v-img v-if="card.style==1 && card.image" :src="card.image.src"></v-img>
+
         <v-img
           v-if="!card.style"
           :src="card.image.src"
           :class="card.image.class"
           :position="card.image.pos"
         >
-          <v-card-title v-if="card.title">{{ card.title }}</v-card-title>
+          <v-card-title v-if="card.title" style="display:inline-block">
+            {{ card.title }}
+          </v-card-title>
             <v-card-subtitle v-if="card.subtitle" :class="card.textcolor">
             {{ card.subtitle }}
           </v-card-subtitle>
@@ -83,16 +86,14 @@
             </v-card-text>
           </v-col>
           <v-col cols="auto">
-            <v-avatar
-              v-if="card.image"
-              class="ma-3 ma-md-0 mr-md-3 mt-md-3"
-              size="125"
-              tile
-            >
+            <v-avatar v-if="card.image" class="ma-3 ml-md-0 mb-md-0" size="125" tile>
               <v-img :src="card.image.src" :position="card.image.pos"></v-img>
             </v-avatar>
           </v-col>
         </v-row>
+
+        <div v-if="card.html" v-html="card.html"></div>
+
         <v-card-actions v-if="card.actions">
           <v-btn v-for="(act, i) of card.actions" :key="act.text + i" text>
             {{ act.text }}
@@ -107,12 +108,21 @@
       vuetify: new Vuetify(),
       data: {
         cards: [
+          ["fivemin", 4],
           ["crossyuu", 0],
-          ["mikabop", 0],
           ["mikayuuweek", 4],
-          ["serapoke", 3],
+          ["serapoke", 5],
+          ["mikabop", 0],
         ],
         cardData: {
+          fivemin: {
+            title: "5-Minute Mikayuu",
+            image: {
+              src: "https://66.media.tumblr.com/63390ad2639761a7f93ba22c8ee9404e/b0c66c29f9007769-b6/s1280x1920/c2c61a8514bdd675265842c7ecfeef217cf52cec.jpg",
+              class: "align-end text-right"
+            },
+            link: "https://5minmikayuu.tumblr.com"
+          },
           mikayuuweek: {
             title: "Mikayuu Week 2019",
             subtitle: "Interactive board which cycles through content over the course of a week",
@@ -128,9 +138,10 @@
             title: "Mika Bop",
             subtitle: "No one seems to have common sense these days. Bop them as they show up with bad ideas.",
             image: {
-              src: "https://ygg2.github.io/mika-bop/img/mika_up.png"
+              src: "https://ygg2.github.io/mika-bop/img/mika_down.png"
             },
-            link: "https://ygg2.github.io/mika-bop/"
+            link: "https://ygg2.github.io/mika-bop/",
+            html: `<img src="https://ygg2.github.io/mika-bop/img/ferid.png"><img src="https://ygg2.github.io/mika-bop/img/mika_up.png">`
           },
           crossyuu: {
             style: 2,
