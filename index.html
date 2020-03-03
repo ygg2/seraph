@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet"> 
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <style>
+    [v-cloak]   { display: none; }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Seraph of the End</title>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+
+      <v-app-bar app dense dark color="teal lighten-2">
+        <v-toolbar-title>Seraph of the End Stuff</v-toolbar-title>
+      </v-app-bar>
+  
+      <v-content>
+        <v-container>
+          <v-row align-content="stretch">
+            <v-col v-for="card of cards" :key="card[0]" :md="card[1]">
+              <sample-card :card="cardData[card[0]]"></sample-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+  
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  <script>
+    Vue.component("sample-card", {
+      props: {
+        card: Object
+      },
+      template: `
+      <v-card
+        :dark="card.dark"
+        :color="card.color"
+        :href="card.link"
+        height="100%"
+      >
+        <v-img v-if="card.style==1 && card.image" :src="card.image.src"></v-img>
+        <v-img
+          v-if="!card.style"
+          :src="card.image.src"
+          :class="card.image.class"
+          :position="card.image.pos"
+        >
+          <v-card-title v-if="card.title">{{ card.title }}</v-card-title>
+            <v-card-subtitle v-if="card.subtitle" :class="card.textcolor">
+            {{ card.subtitle }}
+          </v-card-subtitle>
+          <v-card-text>{{ card.text ? card.text : '' }}</v-card-text>
+        </v-img>
+  
+        <div v-else-if="card.style==1">
+          <v-card-title v-if="card.title">{{ card.title }}</v-card-title>
+          <v-card-subtitle v-if="card.subtitle" :class="card.textcolor">
+            {{ card.subtitle }}
+          </v-card-subtitle>
+          <v-card-text>{{ card.text ? card.text : '' }}</v-card-text>
+        </div>
+  
+        <v-row v-else-if="card.style==2" class="flex-nowrap" no-gutters>
+          <v-col>
+            <v-card-title v-if="card.title" :class="card.textcolor">
+              {{ card.title }}
+            </v-card-title>
+            <v-card-subtitle v-if="card.subtitle" :class="card.textcolor">
+              {{ card.subtitle }}
+            </v-card-subtitle>
+            <v-card-text :class="card.textcolor">
+              {{ card.text ? card.text : '' }}
+            </v-card-text>
+          </v-col>
+          <v-col cols="auto">
+            <v-avatar
+              v-if="card.image"
+              class="ma-3 ma-md-0 mr-md-3 mt-md-3"
+              size="125"
+              tile
+            >
+              <v-img :src="card.image.src" :position="card.image.pos"></v-img>
+            </v-avatar>
+          </v-col>
+        </v-row>
+        <v-card-actions v-if="card.actions">
+          <v-btn v-for="(act, i) of card.actions" :key="act.text + i" text>
+            {{ act.text }}
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+      `
+    })
+
+    var app = new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        cards: [
+          ["crossyuu", 0],
+          ["mikabop", 0],
+          ["mikayuuweek", 4],
+          ["serapoke", 3],
+        ],
+        cardData: {
+          mikayuuweek: {
+            title: "Mikayuu Week 2019",
+            subtitle: "Interactive board which cycles through content over the course of a week",
+            image: {
+              src: "https://ygg2.github.io/mikayuu-week-2019/sleepies.jpg",
+              class: 'cyan--text text--lighten-4'
+            },
+            textcolor: 'cyan--text text--lighten-4',
+            link: "https://ygg2.github.io/mikayuu-week-2019"
+          },
+          mikabop: {
+            style: 2,
+            title: "Mika Bop",
+            subtitle: "No one seems to have common sense these days. Bop them as they show up with bad ideas.",
+            image: {
+              src: "https://ygg2.github.io/mika-bop/img/mika_up.png"
+            },
+            link: "https://ygg2.github.io/mika-bop/"
+          },
+          crossyuu: {
+            style: 2,
+            title: "Crossyuu Road",
+            subtitle: "Yuu can kill vampires and save civilians, but can he cross the road?",
+            text: "For Caydence.",
+            image: {
+              src: "https://ygg2.github.io/crossyuu-road/spr/title_screen.jpg",
+              pos: "bottom",
+            },
+            link: "https://ygg2.github.io/crossyuu-road",
+            color: "#22896E",
+            textcolor: "teal--text text--accent-1"
+          },
+          revamp: {
+            style: 2,
+            title: "Revamp",
+            subtitle: "Vampires? In my JIDA? It's more likely than you think",
+            text: "Last update: 3 March 2020 - 1. Heuristic",
+            dark: true,
+            link: "https://ygg2.github.io/revamp"
+          },
+          serapoke: {
+            style: 1,
+            title: "Serapoke",
+            subtitle: "A small RPG",
+            text: "For Coatl.",
+            image: {
+              src: "https://ygg2.github.io/serapoke/images/title.jpg",
+            },
+            link: "https://ygg2.github.io/serapoke"
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
