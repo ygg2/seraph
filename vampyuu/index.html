@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <style>
+    [v-cloak]   { display: none; }
+    .box {
+      padding: 0;
+      overflow: hidden;
+      flex-basis: 100%;
+    }
+    .cover-tile {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Seraph of the End</title>
+</head>
+<body>
+  <main id="app" v-cloak>
+  
+    <section class="section">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+          <ul>
+            <li><a href="/">Seraph</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Vamp Yuu</a></li>
+          </ul>
+        </nav>
+        <h1 class="title">Vamp Yuu Content</h1>
+        <div
+          style="padding-bottom: 28px"
+          v-for="group of groups"
+          :key="group.name"
+        >
+          <component :is="group.layout" :images="group.images"></component>
+        </div>
+      </div>
+    </section>
+  
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script>
+    Vue.component('image-box', {
+      props: {
+        src: String
+      },
+      template: `
+      <div class="tile is-child box">
+        <img class="cover-tile" :src="src">
+      </div>
+      `
+    })
+
+    Vue.component('box-layout-1', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div class="tile">
+          <div class="tile is-parent">
+            <image-box :src="images[0]"></image-box>
+          </div>
+          <div class="tile is-parent is-vertical">
+            <image-box :src="images[1]"></image-box>
+            <image-box :src="images[2]"></image-box>
+          </div>
+        </div>
+        <div class="tile is-vertical">
+          <div class="tile">
+            <div class="tile is-parent">
+              <image-box :src="images[3]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[4]"></image-box>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="tile is-parent">
+              <image-box :src="images[5]"></image-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+    })
+
+    Vue.component('box-layout-2', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div v-for="img of images" :key="img" class="tile is-parent">
+          <image-box :src="img"></image-box>
+        </div>
+      </div>
+      `
+    })
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        groups: [
+          {
+            name: '5-Minute Mikayuu',
+            layout: 'box-layout-1',
+            images: [
+              'v_for_vampire.jpg',
+              'noble_saves_witch.jpg',
+              'vamps.jpg',
+              'nuzzle.jpg',
+              'reversal.jpg',
+              'overgrown.jpg',
+            ]
+          },
+          {
+            name: 'Mikayuu Week',
+            layout: 'box-layout-2',
+            images: [
+              'small_vamp.jpg',
+              'not_my_blood_type.jpg',
+              'come_crashing.jpg',
+              'lin_art.jpg',
+            ]
+          },
+          {
+            name: 'Other',
+            layout: 'box-layout-1',
+            images: [
+              'beach.jpg',
+              'hand_drink.jpg',
+              'hug.jpg',
+              'vamp_yuu.jpg'
+            ]
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
