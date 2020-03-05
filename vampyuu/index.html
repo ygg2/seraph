@@ -10,11 +10,22 @@
       padding: 0;
       overflow: hidden;
       flex-basis: 100%;
+      display: flex;
     }
     .cover-tile {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+    .modal-image {
+      position: fixed;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    @media (max-width: 768px) {
+      .box {
+        display: flex;
+      }
     }
   </style>
   <meta charset="utf-8">
@@ -32,16 +43,41 @@
             <li class="is-active"><a href="#" aria-current="page">Vamp Yuu</a></li>
           </ul>
         </nav>
-        <h1 class="title">Vamp Yuu Content</h1>
-        <div
-          style="padding-bottom: 28px"
-          v-for="group of groups"
-          :key="group.name"
-        >
-          <component :is="group.layout" :images="group.images"></component>
+        <div class="level">
+          <div class="level-left">
+            <h1 class="title level-item">Vampire Yuu Content</h1>
+          </div>
+          <div class="field level-right">
+            <search-bar @search="search"></search-bar>
+          </div>
+        </div>
+        <div class="tags">
+          <span v-for="query of queries" class="tag is-medium">
+            {{ query }}&nbsp;
+            <button class="delete is-small" @click="remove(query)"></button>
+          </span>
+        </div>
+        <div class="columns is-vcentered is-multiline">
+          <div v-for="image of results" class="column is-3">
+            <div class="box"><img :src="image.src"></div>
+          </div>
+        </div>
+        <div v-show="!queries.size">
+          <div
+            style="padding-bottom: 24px"
+            v-for="group of groups"
+            :key="group.name"
+          >
+            <component :is="group.layout" :images="group.images"></component>
+          </div>
         </div>
       </div>
     </section>
+
+    <div v-if="modal!=null" class="modal is-active">
+      <div class="modal-background" @click="closeModal"></div>
+      <img :src="modal.src" class="modal-image">
+    </div>
   
   </main>
 
@@ -52,13 +88,52 @@
         src: String
       },
       template: `
-      <div class="tile is-child box">
-        <img class="cover-tile" :src="src">
+      <div class="tile is-child box" @click="openModal">
+        <img class="cover-tile" :src="src.src">
+      </div>
+      `,
+      methods: {
+        openModal() {
+          document.documentElement.classList.add("is-clipped");
+          this.$root.modal = this.src;
+        }
+      }
+    })
+
+    Vue.component('box-layout-any', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div v-for="img of images" :key="img" class="tile is-parent">
+          <image-box :src="img"></image-box>
+        </div>
       </div>
       `
     })
 
-    Vue.component('box-layout-1', {
+    Vue.component('box-layout-4', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div class="tile is-parent is-3 is-vertical">
+          <image-box :src="images[0]"></image-box>
+          <image-box :src="images[1]"></image-box>
+        </div>
+        <div class="tile is-parent">
+          <image-box :src="images[2]"></image-box>
+        </div>
+        <div class="tile is-parent is-3">
+          <image-box :src="images[3]"></image-box>
+        </div>
+      </div>
+      `
+    })
+
+    Vue.component('box-layout-6', {
       props: {
         images: Array
       },
@@ -92,65 +167,163 @@
       `
     })
 
-    Vue.component('box-layout-2', {
+    Vue.component('box-layout-5', {
       props: {
         images: Array
       },
       template: `
       <div class="tile is-ancestor">
-        <div v-for="img of images" :key="img" class="tile is-parent">
-          <image-box :src="img"></image-box>
+        <div class="tile is-9 is-vertical">
+          <div class="tile">
+            <div class="tile is-parent is-8">
+              <image-box :src="images[0]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[1]"></image-box>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="tile is-parent is-4">
+              <image-box :src="images[2]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[3]"></image-box>
+            </div>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <image-box :src="images[4]"></image-box>
         </div>
       </div>
       `
     })
 
+    Vue.component('search-bar', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="control has-icons-left">
+        <input
+          class="input"
+          type="search"
+          v-model="query"
+          @keyup.enter="search"
+        >
+        <span class="icon is-small is-left">
+          <i class="fas fa-search fa-xs"></i>
+        </span>
+      </div>
+      `,
+      data() {
+        return {
+          query: '',
+          aliases: new Map([
+            ['beach', /:?wi(?::)?|beach/],
+            ['only yuu', /just yuu|yuu only/],
+            ['mika', /mika(?:ela|yuu)?|yuumika/],
+            ['vampire mika', /vamp.*(?=mikayuu|yuumika|mika)/],
+            ['reversal', /revers.*|jida mika/],
+            ['5 min', /(?:5|five).?min.*/]
+          ])
+        }
+      },
+      methods: {
+        search() {
+          if (this.aliases.get(this.query)) {
+            this.$emit('search', this.query);
+          } else {
+            for (let [key, value] of this.aliases) {
+              if (value.test(this.query)) {
+                this.$emit('search', key);
+              }
+            }
+          }
+        }
+      }
+    })
+
     var app = new Vue({
       el: '#app',
       data: {
+        modal: null,
+        queries: new Set(),
+        results: [],
         groups: [
           {
-            name: '5-Minute Mikayuu',
-            layout: 'box-layout-1',
+            name: 'General',
+            layout: 'box-layout-6',
             images: [
-              'v_for_vampire.jpg',
-              'noble_saves_witch.jpg',
-              'vamps.jpg',
-              'nuzzle.jpg',
-              'reversal.jpg',
-              'overgrown.jpg',
+              { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach'] },
+              { src: 'hug.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'hand_drink.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'vamp_yuu.jpg', tags: ['only yuu'] },
+              { src: 'wip_blood.jpg', tags: ['only yuu'] },
+              { src: 'lying_down.jpg', tags: ['only yuu'] },
+            ]
+          },
+          {
+            name: 'General 2',
+            layout: 'box-layout-4',
+            images: [
+              { src: 'fridge.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'hoods.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] }
+            ]
+          },
+          {
+            name: '5-Minute Mikayuu',
+            layout: 'box-layout-5',
+            images: [
+              { src: 'overgrown.jpg', tags: ['mika', 'vampire mika', '5 min'] },
+              { src: 'nuzzle.jpg', tags: ['mika', 'vampire mika', '5 min'] },
+              { src: 'noble_saves_witch.jpg', tags: ['mika', '5 min'] },
+              { src: 'reversal.jpg', tags: ['mika', 'reversal', '5 min'] },
+              { src: 'v_is_for.jpg', tags: ['mika', 'vampire mika', '5 min'] }
             ]
           },
           {
             name: 'Mikayuu Week',
-            layout: 'box-layout-2',
+            layout: 'box-layout-any',
             images: [
-              'small_vamp.jpg',
-              'not_my_blood_type.jpg',
-              'come_crashing.jpg',
-              'lin_art.jpg',
-            ]
-          },
-          {
-            name: 'Other',
-            layout: 'box-layout-1',
-            images: [
-              'beach.jpg',
-              'hug.jpg',
-              'hand_drink.jpg',
-              'vamp_yuu.jpg',
-              'wip_blood.jpg',
-              'hoods.jpg'
-            ]
-          },
-          {
-            name: 'Other 2',
-            layout: 'box-layout-2',
-            images: [
-              'fridge.jpg'
+              { src: 'small_vamp.jpg', tags: ['only yuu'] },
+              { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'lin_art.jpg', tags: ['mika', 'vampire mika'] }
             ]
           }
         ]
+      },
+      methods: {
+        closeModal() {
+          document.documentElement.classList.remove("is-clipped");
+          this.modal = null;
+        },
+        search(term) {
+          this.queries.add(term);
+          this.refresh();
+        },
+        remove(term) {
+          this.queries.delete(term);
+          this.refresh();
+        },
+        refresh() {
+          this.results = [];
+          if (this.queries.size) {
+            for (let group of this.groups) {
+              for (let image of group.images) {
+                let match = true
+                let imageTags = new Set(image.tags);
+                for (let query of this.queries) {
+                  if (!imageTags.has(query)) {
+                    match = false;
+                  }
+                }
+                if (match) this.results.push(image);
+              }
+            }
+          }
+        }
       }
     })
   </script>
