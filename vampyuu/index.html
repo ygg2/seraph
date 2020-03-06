@@ -10,7 +10,7 @@
       padding: 0;
       overflow: hidden;
       flex-basis: 100%;
-      display: flex;
+      line-height: 0;
     }
     .cover-tile {
       width: 100%;
@@ -21,11 +21,6 @@
       position: fixed;
       max-width: 90vw;
       max-height: 90vh;
-    }
-    @media (max-width: 768px) {
-      .box {
-        display: flex;
-      }
     }
   </style>
   <meta charset="utf-8">
@@ -59,7 +54,9 @@
         </div>
         <div class="columns is-vcentered is-multiline">
           <div v-for="image of results" class="column is-3">
-            <div class="box"><img :src="image.src"></div>
+            <div class="box" @click="openModal(image)">
+              <img :src="image.src">
+            </div>
           </div>
         </div>
         <div v-show="!queries.size">
@@ -88,16 +85,10 @@
         src: String
       },
       template: `
-      <div class="tile is-child box" @click="openModal">
+      <div class="tile is-child box" @click="$root.openModal(src)">
         <img class="cover-tile" :src="src.src">
       </div>
       `,
-      methods: {
-        openModal() {
-          document.documentElement.classList.add("is-clipped");
-          this.$root.modal = this.src;
-        }
-      }
     })
 
     Vue.component('box-layout-any', {
@@ -295,6 +286,10 @@
         ]
       },
       methods: {
+        openModal(image) {
+          document.documentElement.classList.add("is-clipped");
+          this.modal = image;
+        },
         closeModal() {
           document.documentElement.classList.remove("is-clipped");
           this.modal = null;
