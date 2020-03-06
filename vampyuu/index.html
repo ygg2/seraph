@@ -46,6 +46,7 @@
             <search-bar @search="search"></search-bar>
           </div>
         </div>
+        <p v-show="invalidTag">No tags match that search.</p>
         <div class="tags">
           <span v-for="query of queries" class="tag is-medium">
             {{ query }}&nbsp;
@@ -226,15 +227,20 @@
       },
       methods: {
         search() {
+          let invalidTag = true;
           if (this.aliases.get(this.query)) {
+            invalidTag = false;
             this.$emit('search', this.query);
           } else {
             for (let [key, value] of this.aliases) {
               if (value.test(this.query)) {
+                invalidTag = false;
                 this.$emit('search', key);
               }
             }
           }
+          this.$root.invalidTag = invalidTag;
+          this.query = '';
         }
       }
     })
@@ -245,6 +251,7 @@
         modal: null,
         queries: new Set(),
         results: [],
+        invalidTag: false,
         groups: [
           {
             name: 'General',
