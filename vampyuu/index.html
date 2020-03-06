@@ -216,12 +216,12 @@
         return {
           query: '',
           aliases: new Map([
-            ['beach', /^:?wi:?$|beach/],
+            ['beach', /\b:?wi:?\b|beach/],
             ['only yuu', /(?:only|just) yuu|yuu only/],
             ['mika', /mika(?:ela|yuu)?|yuumika/],
             ['vampire mika', /vamp.*(?=mikayuu|yuumika|mika)/],
             ['reversal', /revers.*|jida mika/],
-            ['5 min', /(?:5|five).?min.*/],
+            ['5 min', /(?:5|five).?min/],
             ['blood drinking', /blood ?(?:drink|shar|suck)|wine/],
             ['come crashing', /come crashing|\bcc\b/]
           ])
@@ -262,7 +262,7 @@
             images: [
               { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach', 'blood drinking'] },
               { src: 'hug.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'hand_drink.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] },
               { src: 'vamp_yuu.jpg', tags: ['only yuu'] },
               { src: 'wip_blood.jpg', tags: ['only yuu'] },
               { src: 'lying_down.jpg', tags: ['only yuu'] },
@@ -272,9 +272,10 @@
             name: 'General 2',
             layout: 'box-layout-4',
             images: [
-              { src: 'fridge.jpg', tags: ['mika', 'vampire mika', 'blood drinking','come crashing'] },
+              { src: 'hand_drink.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'hand_drink_variant.jpg', tags: ['mika', 'reversal', 'blood drinking'] },
               { src: 'hoods.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] }
+              { src: 'fridge.jpg', tags: ['mika', 'vampire mika', 'blood drinking','come crashing'] },
             ]
           },
           {
