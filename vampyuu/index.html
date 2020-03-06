@@ -235,6 +235,7 @@
             for (let [key, value] of this.aliases) {
               if (value.test(this.query)) {
                 invalidTag = false;
+                if (key == 'mika' && this.aliases.get('vampire mika').test(this.query)) continue;
                 this.$emit('search', key);
               }
             }
