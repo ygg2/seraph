@@ -194,16 +194,21 @@
         images: Array
       },
       template: `
-      <div class="control has-icons-left">
-        <input
-          class="input"
-          type="search"
-          v-model="query"
-          @keyup.enter="search"
-        >
-        <span class="icon is-small is-left">
-          <i class="fas fa-search fa-xs"></i>
-        </span>
+      <div class="field has-addons">
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="search"
+            v-model="query"
+            @keyup.enter="search"
+          >
+          <span class="icon is-small is-left">
+            <i class="fas fa-search fa-xs"></i>
+          </span>
+        </div>
+        <div class="control">
+          <button type="submit" class="button" @click="search">Search</button>
+        </div>
       </div>
       `,
       data() {
