@@ -216,12 +216,14 @@
         return {
           query: '',
           aliases: new Map([
-            ['beach', /:?wi(?::)?|beach/],
-            ['only yuu', /just yuu|yuu only/],
+            ['beach', /^:?wi:?$|beach/],
+            ['only yuu', /(?:only|just) yuu|yuu only/],
             ['mika', /mika(?:ela|yuu)?|yuumika/],
             ['vampire mika', /vamp.*(?=mikayuu|yuumika|mika)/],
             ['reversal', /revers.*|jida mika/],
-            ['5 min', /(?:5|five).?min.*/]
+            ['5 min', /(?:5|five).?min.*/],
+            ['blood drinking', /blood ?(?:drink|shar|suck)|wine/],
+            ['come crashing', /come crashing|\bcc\b/]
           ])
         }
       },
@@ -258,9 +260,9 @@
             name: 'General',
             layout: 'box-layout-6',
             images: [
-              { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach'] },
+              { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach', 'blood drinking'] },
               { src: 'hug.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'hand_drink.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'hand_drink.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
               { src: 'vamp_yuu.jpg', tags: ['only yuu'] },
               { src: 'wip_blood.jpg', tags: ['only yuu'] },
               { src: 'lying_down.jpg', tags: ['only yuu'] },
@@ -270,7 +272,7 @@
             name: 'General 2',
             layout: 'box-layout-4',
             images: [
-              { src: 'fridge.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'fridge.jpg', tags: ['mika', 'vampire mika', 'blood drinking','come crashing'] },
               { src: 'hoods.jpg', tags: ['mika', 'vampire mika'] },
               { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] }
             ]
@@ -291,8 +293,8 @@
             layout: 'box-layout-any',
             images: [
               { src: 'small_vamp.jpg', tags: ['only yuu'] },
-              { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika', 'come crashing'] },
               { src: 'lin_art.jpg', tags: ['mika', 'vampire mika'] }
             ]
           }
