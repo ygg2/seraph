@@ -25,6 +25,20 @@
           <v-icon>mdi-chevron-right</v-icon>
           {{ currentEpisode.title }}
         </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon
+          v-show="previousEpisode!=null"
+          @click="openEpisode(previousEpisode)"
+        >
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+        {{ episodeNumber }}
+        <v-btn icon
+          v-show="nextEpisode"
+          @click="openEpisode(nextEpisode)"
+        >
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
       </v-app-bar>
 
       <v-navigation-drawer v-model="nav" app dark temporary width="50%">
@@ -63,7 +77,11 @@
         </div>
         <v-container>
           <v-row justify="center" class="pb-5">
-            <v-btn fab large depressed color="white">
+            <v-btn
+              v-show="nextEpisode"
+              fab large depressed color="white"
+              @click="openEpisode(nextEpisode)"
+            >
               <v-icon>mdi-chevron-down</v-icon>
             </v-btn>
           </v-row>
@@ -120,8 +138,17 @@
         ]
       },
       computed: {
+        previousEpisode() {
+          return this.episodeNumber ? this.episodeNumber - 1 : null;
+        },
         currentEpisode() {
           return this.episodes[this.episodeNumber];
+        },
+        nextEpisode() {
+          if (this.episodeNumber < this.episodes.length - 1) {
+            return this.episodeNumber + 1;
+          }
+          return false;
         }
       },
       methods: {
@@ -132,6 +159,7 @@
           }
         },
         openEpisode(ep) {
+          window.scroll(0, 0);
           this.episodeNumber = ep;
         }
       }
