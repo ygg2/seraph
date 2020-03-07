@@ -223,21 +223,23 @@
             ['reversal', /revers.*|jida mika/],
             ['5 min', /(?:5|five).?min/],
             ['blood drinking', /blood ?(?:drink|shar|suck)|wine/],
-            ['come crashing', /come crashing|\bcc\b/]
+            ['come crashing', /come crashing|\bcc\b/],
+            ['lineless paper', /(?:unlined|unruled)|paper (?:without|no) lines/]
           ])
         }
       },
       methods: {
         search() {
+          let query = this.query.toLowerCase();
           let invalidTag = true;
-          if (this.aliases.get(this.query)) {
+          if (this.aliases.get(query)) {
             invalidTag = false;
-            this.$emit('search', this.query);
+            this.$emit('search', query);
           } else {
             for (let [key, value] of this.aliases) {
-              if (value.test(this.query)) {
+              if (value.test(query)) {
                 invalidTag = false;
-                if (key == 'mika' && this.aliases.get('vampire mika').test(this.query)) continue;
+                if (key == 'mika' && this.aliases.get('vampire mika').test(query)) continue;
                 this.$emit('search', key);
               }
             }
@@ -263,7 +265,7 @@
               { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach', 'blood drinking'] },
               { src: 'hug.jpg', tags: ['mika', 'vampire mika'] },
               { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'vamp_yuu.jpg', tags: ['only yuu'] },
+              { src: 'vamp_yuu.jpg', tags: ['only yuu', 'lineless paper'] },
               { src: 'wip_blood.jpg', tags: ['only yuu'] },
               { src: 'lying_down.jpg', tags: ['only yuu'] },
             ]
@@ -293,10 +295,10 @@
             name: 'Mikayuu Week',
             layout: 'box-layout-any',
             images: [
-              { src: 'small_vamp.jpg', tags: ['only yuu'] },
-              { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
-              { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika', 'come crashing'] },
-              { src: 'lin_art.jpg', tags: ['mika', 'vampire mika'] }
+              { src: 'small_vamp.jpg', tags: ['only yuu', 'lineless paper'] },
+              { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika', 'blood drinking', 'lineless paper'] },
+              { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika', 'come crashing', 'lineless paper'] },
+              { src: 'lin_art.jpg', tags: ['mika', 'vampire mika', 'lineless paper'] }
             ]
           }
         ]

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova&display=swap" rel="stylesheet"> 
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <style>
+    [v-cloak]   { display: none; }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Seraph of the End</title>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <v-app>
+
+      <v-app-bar app dense dark color="teal lighten-2">
+        <v-app-bar-nav-icon @click.stop="nav=!nav"></v-app-bar-nav-icon>
+        <v-toolbar-title>Seraph of the End Stuff</v-toolbar-title>
+      </v-app-bar>
+
+      <v-navigation-drawer v-model="nav" bottom mobile-break-point="600" app>
+        <v-list-item v-for="(ep, i) of episodes" :key="ep" @click="openEp(i)">
+          <v-list-item-avatar size="64">
+            <v-img
+              :src="ep.pages[0]"
+              :min-width="ep.zoom"
+              :position="ep.position">
+            </v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>{{ ep.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-navigation-drawer>
+  
+      <v-content app>
+        <div class="d-flex justify-center">
+          <img v-for="page of currentEpisode.pages" :src="page">
+        </div>
+      </v-content>
+  
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        nav: false,
+        episodeNumber: 0,
+        episodes: [
+          {
+            title:'Prologue',
+            zoom: '128',
+            position: '0 5%',
+            pages: [
+              '1.jpg'
+            ]
+          }
+        ]
+      },
+      computed: {
+        currentEpisode() {
+          return this.episodes[this.episodeNumber];
+        }
+      },
+      methods: {
+        openEp(ep) {
+          this.episodeNumber = ep;
+        }
+      }
+    })
+  </script>
+</body>
+</html>
