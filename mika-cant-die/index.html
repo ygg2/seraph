@@ -18,23 +18,30 @@
   <div id="app" v-cloak>
     <v-app>
 
-      <v-app-bar app :value="toolbar" dense dark color="teal lighten-2">
+      <v-app-bar app :value="toolbar" dense dark>
         <v-app-bar-nav-icon @click.stop="nav=!nav"></v-app-bar-nav-icon>
-        <v-toolbar-title>Yuu'll Be the Death of Me</v-toolbar-title>
+        <v-toolbar-title class="body-1">
+          Yuu'll Be the Death of Me
+          <v-icon>mdi-chevron-right</v-icon>
+          {{ currentEpisode.title }}
+        </v-toolbar-title>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="nav" bottom mobile-break-point="600" app>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="font-weight-medium">
-              Yuu'll Be the Death of Me
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              by <a href="https://twitter.com/anahhzp">Ana</a> and <a href="../">Ygg</a>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item v-for="(ep, i) of episodes" :key="ep" @click="openEp(i)">
+      <v-navigation-drawer v-model="nav" app dark temporary width="50%">
+        <v-card tile class="mb-3">
+          <v-img src="" class="white--text align-end">
+            <v-card-title>Yuu'll Be the Death of Me</v-card-title>
+            <v-card-subtitle>by Ana & Ygg</v-card-subtitle>
+            <v-card-text>
+              AU of and AU of an AU, but merged with an AU
+            </v-card-text>
+          </v-img>
+        </v-card>
+        <v-list-item
+          v-for="(ep, i) of episodes"
+          :key="ep.title"
+          @click="openEpisode(i)"
+        >
           <v-list-item-avatar size="64">
             <v-img
               :src="ep.pages[0]"
@@ -54,12 +61,44 @@
             <img v-for="page of currentEpisode.pages" :src="page" class="page">
           </div>
         </div>
+        <v-container>
+          <v-row justify="center" class="pb-5">
+            <v-btn fab large depressed color="white">
+              <v-icon>mdi-chevron-down</v-icon>
+            </v-btn>
+          </v-row>
+        </v-container>
       </v-content>
+
+      <v-footer>
+        <v-col class="text-center">
+          <v-btn href="https://twitter.com/anahhzp" fab depressed class="mx-2">
+            <v-avatar size="64">
+              <v-img src="ana.jpg"></v-img>
+            </v-avatar>
+          </v-btn>
+          <v-btn href="../" fab depressed class="mx-2">
+            <v-avatar size="64">
+              <v-img src="ygg.jpg"></v-img>
+            </v-avatar>
+          </v-btn>
+          <p class="font-weight-light py-4">Ana & Ygg - 2020</p>
+        </v-col>
+      </v-footer>
+
+      <v-fab-transition>
+        <v-btn
+          fab fixed large dark bottom right
+          v-show="toolbar"
+          @click="$vuetify.goTo(0)">
+          <v-icon>mdi-chevron-up</v-icon>
+        </v-btn>
+      </v-fab-transition>
   
     </v-app>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
   <script>
     var app = new Vue({
@@ -92,7 +131,7 @@
             this.nav = false;
           }
         },
-        openEp(ep) {
+        openEpisode(ep) {
           this.episodeNumber = ep;
         }
       }
