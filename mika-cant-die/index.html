@@ -11,18 +11,28 @@
   </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
-  <title>Seraph of the End</title>
+  <title>Yuu'll Be the Death of Me</title>
 </head>
 <body>
   <div id="app" v-cloak>
     <v-app>
 
-      <v-app-bar app dense dark color="teal lighten-2">
+      <v-app-bar app :value="toolbar" dense dark color="teal lighten-2">
         <v-app-bar-nav-icon @click.stop="nav=!nav"></v-app-bar-nav-icon>
-        <v-toolbar-title>Seraph of the End Stuff</v-toolbar-title>
+        <v-toolbar-title>Yuu'll Be the Death of Me</v-toolbar-title>
       </v-app-bar>
 
       <v-navigation-drawer v-model="nav" bottom mobile-break-point="600" app>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="font-weight-medium">
+              Yuu'll Be the Death of Me
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              by <a href="https://twitter.com/anahhzp">Ana</a> and <a href="../">Ygg</a>
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item v-for="(ep, i) of episodes" :key="ep" @click="openEp(i)">
           <v-list-item-avatar size="64">
             <v-img
@@ -38,7 +48,7 @@
       </v-navigation-drawer>
   
       <v-content app>
-        <div class="d-flex justify-center">
+        <div class="d-flex justify-center" @click="hideToolbar">
           <img v-for="page of currentEpisode.pages" :src="page">
         </div>
       </v-content>
@@ -54,6 +64,7 @@
       vuetify: new Vuetify(),
       data: {
         nav: false,
+        toolbar: true,
         episodeNumber: 0,
         episodes: [
           {
@@ -61,7 +72,7 @@
             zoom: '128',
             position: '0 5%',
             pages: [
-              '1.jpg'
+              'prologue/1.jpg'
             ]
           }
         ]
@@ -72,6 +83,12 @@
         }
       },
       methods: {
+        hideToolbar() {
+          this.toolbar = !this.toolbar;
+          if (!this.toolbar) {
+            this.nav = false;
+          }
+        },
         openEp(ep) {
           this.episodeNumber = ep;
         }
