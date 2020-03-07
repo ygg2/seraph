@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <style>
     [v-cloak]   { display: none; }
-    .page       { max-width: 100%; height: auto !important; }
+    .page       { max-width: 100%; }
   </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -50,7 +50,9 @@
   
       <v-content app>
         <div class="d-flex justify-center" @click="hideToolbar">
-          <img v-for="page of currentEpisode.pages" :src="page" class="page">
+          <div>
+            <img v-for="page of currentEpisode.pages" :src="page" class="page">
+          </div>
         </div>
       </v-content>
   
