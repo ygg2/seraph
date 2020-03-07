@@ -21,8 +21,8 @@
       <v-app-bar app :value="toolbar" dense dark>
         <v-app-bar-nav-icon @click.stop="nav=!nav"></v-app-bar-nav-icon>
         <v-toolbar-title class="body-1">
-          Yuu'll Be the Death of Me
-          <v-icon>mdi-chevron-right</v-icon>
+          {{ $vuetify.breakpoint.xs ? '' : "Yuu'll Be the Death of Me" }}
+          <v-icon v-if="$vuetify.breakpoint.smAndUp">mdi-chevron-right</v-icon>
           {{ currentEpisode.title }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
@@ -41,9 +41,12 @@
         </v-btn>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="nav" app dark temporary width="50%">
+      <v-navigation-drawer v-model="nav" app dark temporary :width="navSize">
         <v-card tile class="mb-3">
-          <v-img src="" class="white--text align-end">
+          <v-img src="sidebar.jpg" class="white--text align-end">
+            <v-btn icon absolute top left @click="nav=false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
             <v-card-title>Yuu'll Be the Death of Me</v-card-title>
             <v-card-subtitle>by Ana & Ygg</v-card-subtitle>
             <v-card-text>
@@ -128,6 +131,14 @@
         episodeNumber: 0,
         episodes: [
           {
+            title: 'Title Page',
+            zoom: '64',
+            position: '40% 0',
+            pages: [
+              'cover.jpg'
+            ]
+          },
+          {
             title:'Prologue',
             zoom: '128',
             position: '0 5%',
@@ -138,6 +149,12 @@
         ]
       },
       computed: {
+        navSize() {
+          if (this.$vuetify.breakpoint.smAndUp) {
+            return Math.min(this.$vuetify.breakpoint.width / 2, 500);
+          }
+          return '100%';
+        },
         previousEpisode() {
           return this.episodeNumber ? this.episodeNumber - 1 : null;
         },
@@ -161,6 +178,7 @@
         openEpisode(ep) {
           window.scroll(0, 0);
           this.episodeNumber = ep;
+          this.nav = false;
         }
       }
     })
