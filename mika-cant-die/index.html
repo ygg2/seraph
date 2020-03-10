@@ -61,14 +61,14 @@
             <v-card-title>Yuu'll Be the Death of Me</v-card-title>
             <v-card-subtitle>by Ana & Ygg</v-card-subtitle>
             <v-card-text>
-              AU of and AU of an AU, but merged with an AU
+              AU of an AU of an AU, but merged with an AU
             </v-card-text>
           </v-img>
         </v-card>
         <v-list-item
-          v-for="(ep, i) of episodes"
+          v-for="(ep, i) of episodesReversed"
           :key="ep.title"
-          @click="openEpisode(i)"
+          @click="openEpisode(episodes.length - i - 1)"
         >
           <v-list-item-avatar size="64">
             <v-img
@@ -140,6 +140,7 @@
         nav: false,
         toolbar: true,
         episodeNumber: 0,
+        episodesReversed: [],
         episodes: [
           {
             title: 'Title Page',
@@ -191,6 +192,9 @@
           this.episodeNumber = ep;
           this.nav = false;
         }
+      },
+      created() {
+        this.episodesReversed = this.episodes.slice().reverse();
       }
     })
   </script>
