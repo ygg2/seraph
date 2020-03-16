@@ -87,7 +87,7 @@
       },
       template: `
       <div class="tile is-child box" @click="$root.openModal(src)">
-        <img class="cover-tile" :src="src.src">
+        <img class="cover-tile" :src="src.src" loading="lazy">
       </div>
       `,
     })
@@ -102,6 +102,25 @@
           <image-box :src="img"></image-box>
         </div>
       </div>
+      `
+    })
+
+    Vue.component('box-layout-3', {
+      props: {
+        images: Array
+      },
+      template: `
+        <div class="tile is-ancestor">
+          <div class="tile is-parent is-3">
+            <image-box :src="images[0]"></image-box>
+          </div>
+          <div class="tile is-parent is-6">
+            <image-box :src="images[1]"></image-box>
+          </div>
+          <div class="tile is-parent is-3">
+            <image-box :src="images[2]"></image-box>
+          </div>
+        </div>
       `
     })
 
@@ -224,6 +243,7 @@
             ['5 min', /(?:5|five).?min/],
             ['blood drinking', /blood ?(?:drink|shar|suck)|wine/],
             ['come crashing', /come crashing|\bcc\b/],
+            ['color', /color(?:ed|ing)?/],
             ['lineless paper', /(?:unlined|unruled)|paper (?:without|no) lines/]
           ])
         }
@@ -258,6 +278,15 @@
         results: [],
         invalidTag: false,
         groups: [
+        {
+            name: 'General 3',
+            layout: 'box-layout-3',
+            images: [
+              { src: 'buildings.jpg', tags: ['mika', 'vampire mika', '5 min'] },
+              { src: 'cuddle.jpg', tags: ['mika', 'vampire mika'] },
+              { src: 'trail_mix.jpg', tags: ['only yuu'] },
+            ]
+          },
           {
             name: 'General',
             layout: 'box-layout-6',
@@ -265,7 +294,7 @@
               { src: 'beach.jpg', tags: ['mika', 'vampire mika', 'beach', 'blood drinking'] },
               { src: 'hug.jpg', tags: ['mika', 'vampire mika'] },
               { src: 'vamps.jpg', tags: ['mika', 'vampire mika'] },
-              { src: 'vamp_yuu.jpg', tags: ['only yuu', 'lineless paper'] },
+              { src: 'vamp_yuu.jpg', tags: ['only yuu', 'lineless paper', 'color'] },
               { src: 'wip_blood.jpg', tags: ['only yuu'] },
               { src: 'lying_down.jpg', tags: ['only yuu'] },
             ]
@@ -299,6 +328,17 @@
               { src: 'not_my_blood_type.jpg', tags: ['mika', 'vampire mika', 'blood drinking', 'lineless paper'] },
               { src: 'come_crashing.jpg', tags: ['mika', 'vampire mika', 'come crashing', 'lineless paper'] },
               { src: 'lin_art.jpg', tags: ['mika', 'vampire mika', 'lineless paper'] }
+            ]
+          },
+          {
+            name: 'Desktop',
+            layout: 'box-layout-5',
+            images: [
+              { src: 'desktop_5.png', tags: ['mika', 'vampire mika', 'blood drinking', 'color', 'lineless paper'] },
+              { src: 'desktop_2.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'desktop_3.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'desktop_4.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'desktop_1.png', tags: ['only yuu', 'lineless paper'] },
             ]
           }
         ]
