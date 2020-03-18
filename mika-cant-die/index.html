@@ -9,7 +9,12 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <style>
     [v-cloak]   { display: none; }
-    .page       { max-width: 100%; }
+    .page {
+      display: block;
+      max-width: 100%;
+      padding: 0;
+      margin: 0 auto;
+    }
   </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
@@ -84,10 +89,8 @@
       </v-navigation-drawer>
   
       <v-content app>
-        <div class="d-flex justify-center" @click="hideToolbar">
-          <div>
-            <img v-for="page of currentEpisode.pages" :src="page" class="page">
-          </div>
+        <div @click="hideToolbar">
+          <img v-for="page of currentEpisode.pages" :src="page" class="page">
         </div>
         <v-container>
           <v-row justify="center" class="pb-5">
@@ -156,6 +159,16 @@
             position: '0 5%',
             pages: [
               'prologue/1.jpg'
+            ]
+          },
+          {
+            title: 'Episode 1',
+            zoom: '128',
+            position: '0 5%',
+            pages: [
+              'episode1/1.png',
+              'episode1/2.png',
+              'episode1/3.png'
             ]
           }
         ]
