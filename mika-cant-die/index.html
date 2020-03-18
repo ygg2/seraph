@@ -204,10 +204,25 @@
           window.scroll(0, 0);
           this.episodeNumber = ep;
           this.nav = false;
+          let _hash = this.episodes[this.episodeNumber].title.replace(' ', '-')
+            .toLowerCase();
+          window.location.hash = _hash;
         }
       },
       created() {
         this.episodesReversed = this.episodes.slice().reverse();
+        let _hash = window.location.hash.slice(1)
+          .replace(' ', '-')
+          .toLowerCase();
+        if (_hash) {
+          for (var i = 0; i < this.episodes.length; i++) {
+            let _title = this.episodes[i].title.replace(' ', '-').toLowerCase()
+            if (_title == _hash) {
+              this.episodeNumber = i;
+              break;
+            }
+          }
+        }
       }
     })
   </script>
