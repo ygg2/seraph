@@ -108,14 +108,23 @@
       vuetify: new Vuetify(),
       data: {
         cards: [
+          ["bingo", 0],
+          ["serapoke", 4],
           ["fivemin", 4],
           ["crossyuu", 0],
           ["mikayuuweek", 4],
-          ["serapoke", 4],
           ["mikabop", 0],
-          ["vampyuu", 3]
+          ["vampyuu", 4]
         ],
         cardData: {
+          bingo: {
+            title: "Mikayuu Bingo 2020",
+            image: {
+              src: "bingo/free_space.png",
+              class: "white--text"
+            },
+            link: "bingo"
+          },
           fivemin: {
             title: "5-Minute Mikayuu",
             image: {
