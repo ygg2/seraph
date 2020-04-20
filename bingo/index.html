@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta property="og:title" content="MikaYuu Bingo 2020">
+  <meta property="og:type" content="website">
+  <meta property="og:image" itemprop="image" content="https://ygg2.github.io/seraph/bingo-2020/icon.png">
+  <meta property="og:image:secure_url" content="https://ygg2.github.io/seraph/bingo-2020/icon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="256">
+  <meta property="og:image:height" content="256">
+  <meta property="og:image:alt" content="Mika and Yuu playing bingo">
+  <meta property="og:url" content="https://ygg2.github.io/seraph/bingo-2020/">
+  <meta property="og:description" content="Ygg's MikaYuu Bingo card">
+  <link href="icon.ico" type="image/x-icon" rel="shortcut icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <style>
+    [v-cloak]   { display: none; }
+    .v-responsive__content { width: auto !important; }
+    .bingo-row { padding: 12px 0 0 12px !important; }
+    .bingo-col { margin-right: 12px !important; }
+    @media (max-width: 768px) {
+      .bingo-row { display: block; }
+      .bingo-col { display: block; padding: 0 12px 12px 0 !important;}
+    }
+  </style>
+  <title>MikaYuu Bingo 2020</title>
+</head>
+
+<body>
+
+<v-app id="app" v-cloak>
+  <v-content class="yellow lighten-4">
+    <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
+    <v-container class="text-resize">
+      <v-sheet color="white" class="pb-3" elevation="4">
+        <v-row v-for="row, i of rows" :key="i" no-gutters class="bingo-row">
+          <v-col
+            v-for="slot, j of row" :key="j"
+            class="bingo-col"
+            @click.stop="viewSlot(slot, i, j)"
+            tabindex="0"
+          >
+
+            <v-card v-if="!slot.filled" flat class="red lighten-4">
+              <v-responsive aspect-ratio="1" class="flex align-center">
+                <p class="text-center ma-4 mb-10">
+                  {{ slot.prompt }}
+                </p>
+              </v-responsive>
+            </v-card>
+
+            <v-card v-else flat hover :style="slot.css" class="cyan lighten-4">
+              <v-responsive aspect-ratio="1" style="border-radius: 4px">
+
+                <div v-if="slot.text" class="text-center">
+                  <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
+                  <v-card-text>{{ slot.text.sample }}</v-card-text>
+                </div>
+
+                <v-img 
+                  v-else
+                  :src="slot.img.src"
+                  :position="slot.img.pos"
+                  :height="slot.img.zoom"
+                  class="text-center"
+                >
+                  <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
+                </v-img>
+
+              </v-responsive>
+            </v-card>
+            
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-container>
+    <v-dialog
+      v-model="showSlot"
+      :max-width="dialogWidth"
+      :origin="origin"
+    >
+      <v-card :style="currentSlot.css">
+        <div v-if="currentSlot.text">
+          <v-card-title>{{ currentSlot.prompt }}</v-card-title>
+          <v-card-text>
+            {{ currentSlot.text.full }}
+          </v-card-text>
+        </div>
+        <v-img v-if="currentSlot.img" :src="currentSlot.img.src">
+          <v-card-title class="ml-3">{{ currentSlot.prompt }}</v-card-title>
+        </v-img>
+      </v-card>
+    </v-dialog>
+  </v-content>
+</v-app>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  <script>
+    // want: calendar picker to see entry by day
+    var app = new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        breadcrumbs: [
+          { text: 'Seraph', href: '/' },
+          { text: 'Bingo 2020', disabled: true }
+        ],
+        rows: [
+          [
+            {
+              prompt: 'Vulnerable',
+              filled: false
+            },
+            {
+              prompt: 'Radiant',
+              filled: false,
+            },
+            {
+              prompt: 'First kiss',
+              filled: false,
+            },
+            {
+              prompt: 'Hanahaki AU',
+              filled: false,
+            },
+            {
+              prompt: 'Artist AU',
+              filled: false,
+            },
+          ],
+          [
+            {
+              prompt: 'Body swap',
+              filled: false,
+            },
+            {
+              prompt: 'Backstory',
+              filled: false,
+            },
+            {
+              prompt: 'Soulmates AU',
+              filled: false,
+            },
+            {
+              prompt: 'Iconic scene',
+              filled: false,
+            },
+            {
+              prompt: 'Canon Divergence',
+              filled: false,
+            },
+          ],
+          [
+            {
+              prompt: 'Reimagine a scene',
+              filled: false,
+            },
+            {
+              prompt: 'Neko',
+              filled: false,
+            },
+            {
+              prompt: 'Free Space',
+              filled: true,
+              img: {
+                src: 'free_space.png',
+                width: '512',
+                zoom: '100%',
+                pos: '10% 0'
+              },
+              css: {
+                color: '#ffaaaa'
+              }
+            },
+            {
+              prompt: 'Love confessions',
+              filled: false,
+            },
+            {
+              prompt: 'Divine',
+              filled: false,
+            },
+          ],
+          [
+            {
+              prompt: 'Bed sharing',
+              filled: false,
+            },
+            {
+              prompt: 'Royal AU',
+              filled: false,
+            },
+            {
+              prompt: 'Crossover AU',
+              filled: false,
+            },
+            {
+              prompt: 'Magic AU',
+              filled: false,
+            },
+            {
+              prompt: 'High school / college AU',
+              filled: false,
+            },
+          ],
+          [
+            {
+              prompt: 'Mutual pining',
+              filled: false,
+            },
+            {
+              prompt: 'Guilt',
+              filled: false,
+            },
+            {
+              prompt: 'Enemies to lovers',
+              filled: false,
+            },
+            {
+              prompt: 'Isolated / trapped',
+              filled: false,
+            },
+            {
+              prompt: 'Role reversal',
+              filled: false,
+            },
+          ]
+        ],
+        showSlot: false,
+        currentSlot: {},
+        origin: 'center center'
+      },
+      computed: {
+        dialogWidth() {
+          return this.currentSlot.img ? this.currentSlot.img.width : '800';
+        }
+      },
+      methods: {
+        viewSlot(slot, i, j) {
+          if (slot.filled) {
+            this.origin = `${j * 20}% ${i * 20}%`;
+            this.currentSlot = slot;
+            this.showSlot = true;
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
