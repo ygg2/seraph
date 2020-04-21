@@ -69,6 +69,7 @@
                   :position="slot.img.pos"
                   :height="slot.img.zoom"
                   class="text-center"
+                  aspect-ratio="1"
                 >
                   <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
                 </v-img>
@@ -164,7 +165,13 @@
             },
             {
               prompt: 'Neko',
-              filled: false,
+              filled: true,
+              img: {
+                src: 'neko.png',
+                width: '450',
+                zoom: '200%',
+                pos: '50% -7em'
+              }
             },
             {
               prompt: 'Free Space',
