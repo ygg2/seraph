@@ -37,7 +37,7 @@
 <v-app id="app" v-cloak>
   <v-content class="yellow lighten-4">
     <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
-    <v-container class="text-resize">
+    <v-container>
       <v-sheet color="white" class="pb-3" elevation="4">
         <v-row v-for="row, i of rows" :key="i" no-gutters class="bingo-row">
           <v-col
@@ -147,7 +147,13 @@
             },
             {
               prompt: 'Soulmates AU',
-              filled: false,
+              filled: true,
+              img: {
+                src: 'soulmates.png',
+                width: '800',
+                zoom: '120%',
+                pos: '50% 0'
+              }
             },
             {
               prompt: 'Iconic scene',
