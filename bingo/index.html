@@ -354,6 +354,21 @@ Yuu had never been happier to take the stairs.`
             this.showSlot = true;
           }
         }
+      },
+      mounted() {
+        let prompt = window.location.hash.slice(1)
+          .toLowerCase()
+          .replace('-',' ');
+        if (prompt) {
+          for (let row of this.rows) {
+            for (let slot of row) {
+              if (prompt == slot.prompt.toLowerCase()) {
+                this.viewSlot(slot, 2, 2);
+                break;
+              }
+            }
+          }
+        }
       }
     })
   </script>
