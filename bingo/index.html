@@ -60,7 +60,7 @@
 
                 <div v-if="slot.text" class="text-center">
                   <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
-                  <v-card-text>{{ slot.text.sample }}</v-card-text>
+                  <v-card-text>{{ $vuetify.breakpoint.sm ? slot.text.sample : slot.text.extended }}</v-card-text>
                 </div>
 
                 <v-img 
@@ -89,7 +89,7 @@
       <v-card :style="currentSlot.css">
         <div v-if="currentSlot.text">
           <v-card-title>{{ currentSlot.prompt }}</v-card-title>
-          <v-card-text>
+          <v-card-text class="pa-10 pt-0">
             {{ currentSlot.text.full }}
           </v-card-text>
         </div>
@@ -265,8 +265,62 @@
               filled: false,
             },
             {
-              prompt: 'Isolated / trapped',
-              filled: false,
+              prompt: 'Isolated/trapped',
+              filled: true,
+              css: {
+                whiteSpace: 'pre-line'
+              },
+              text: {
+                sample: `"I'm going to kill Guren," he muttered.`,
+                extended: `"I'm going to kill Guren," he muttered.\n\n"Pardon?"`,
+                full: `It was 2 AM, Yuu was about to fall asleep waiting for the elevator, and everything was Guren's fault.
+
+Yuu didn't care for the meeting about overthrowing Hiiragi Inc., and the social afterwards had him metaphorically shoving breadsticks into his purse within minutes. If it wasn't for Guren's insistance, he would've left early as planned, instead of taking the last train and shuffling into his apartment building in the wee hours of the morning.
+
+The elevator arrived. Yuu stumbled in, lightly hit the 10 button, and leaned against the side. He watched the LED number climbing.
+
+6, 7, 8...There was a slight jolt and then the elevator stopped moving entirely. Yuu stared at the unchanging number, baffled. "No way."
+
+Panic rising as the sleepy haze receeded, Yuu pressed 10 again, followed by pretty much every other button, but to no avail. Finally, he smacked his last resort: the emergency call button.
+
+"I'm going to kill Guren," he muttered.
+
+"Pardon?"
+
+Yuu startled. "Uh- nothing!"
+
+"I'm Mika, a technician," the voice continued. "What happened?"
+
+The calm tone of voice immediately made Yuu feel more relaxed. "The elevator stopped. Between floors 8 and 9."
+
+"Okay. Is there anyone else with you?"
+
+"No, just me."
+
+"Alright. Hang on, I'll get you out."
+
+-
+
+Yuu almost freaked out again when the elevator started moving, but it soon reached the 9th floor and he breathed a sign of relief. The doors slid open, revealing his savior, a guy about his height with a hard hat labeled TECH pulled over blond hair. He was crinkling an open bag of sweet and sour chips in one hand.
+
+"Thank you. You're a lifesaver. The best elevator rescuer in the world," Yuu babbled as he left the elevator.
+
+Mika laughed softly. "Technician apprentice, actually, and just doing my job."
+
+"Apprentice?"
+
+"Yes, but Krul stayed late after some business meeting today."
+
+That sounded familiar, but exhaustion was catching up on Yuu. "It is pretty late..."
+
+"Want some chips?" asked Mika. "They work wonders for staying awake."
+
+"Nah, I just want to go home." Yuu took a step in a random direction. "Shoot. My apartment's one floor up."
+
+"I can walk with you to your floor," Mika offered.
+
+Yuu had never been happier to take the stairs.`
+              }
             },
             {
               prompt: 'Role reversal',
