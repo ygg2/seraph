@@ -24,9 +24,9 @@
     .v-responsive__content { width: auto !important; }
     .bingo-row { padding: 12px 0 0 12px !important; }
     .bingo-col { margin-right: 12px !important; }
+    .bingo-prompt { padding: 8px 0 !important; line-height: 1em !important; }
     @media (max-width: 768px) {
-      .bingo-row { display: block; }
-      .bingo-col { display: block; padding: 0 12px 12px 0 !important;}
+      .bingo-prompt { padding: 4px 0 !important; font-size: .7rem !important; }
     }
   </style>
   <title>MikaYuu Bingo 2020</title>
@@ -49,7 +49,7 @@
 
             <v-card v-if="!slot.filled" flat class="red lighten-4">
               <v-responsive aspect-ratio="1" class="flex align-center">
-                <p class="text-center ma-4 mb-10">
+                <p v-if="isLarge" class="text-center ma-4 mb-10">
                   {{ slot.prompt }}
                 </p>
               </v-responsive>
@@ -59,8 +59,10 @@
               <v-responsive aspect-ratio="1" style="border-radius: 4px">
 
                 <div v-if="slot.text" class="text-center">
-                  <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
-                  <v-card-text>{{ $vuetify.breakpoint.sm ? slot.text.sample : slot.text.extended }}</v-card-text>
+                  <v-card-subtitle class="bingo-prompt">
+                    {{ isLarge? slot.prompt : slot.text.keyword }}
+                  </v-card-subtitle>
+                  <v-card-text v-if="isLarge">{{ $vuetify.breakpoint.sm ? slot.text.sample : slot.text.extended }}</v-card-text>
                 </div>
 
                 <v-img 
@@ -71,7 +73,9 @@
                   class="text-center"
                   aspect-ratio="1"
                 >
-                  <v-card-subtitle>{{ slot.prompt }}</v-card-subtitle>
+                  <v-card-subtitle v-if="isLarge">
+                    {{ slot.prompt }}
+                  </v-card-subtitle>
                 </v-img>
 
               </v-responsive>
@@ -87,14 +91,19 @@
       :origin="origin"
     >
       <v-card :style="currentSlot.css">
+        <v-card-title v-if="currentSlot.img && !isLarge">
+          {{ currentSlot.prompt }}
+        </v-card-title>
         <div v-if="currentSlot.text">
           <v-card-title>{{ currentSlot.prompt }}</v-card-title>
-          <v-card-text class="pa-10 pt-0">
+          <v-card-text :class="{ 'pa-10 pt-0': isLarge }">
             {{ currentSlot.text.full }}
           </v-card-text>
         </div>
         <v-img v-if="currentSlot.img" :src="currentSlot.img.src">
-          <v-card-title class="ml-3">{{ currentSlot.prompt }}</v-card-title>
+          <v-card-title v-if="isLarge" class="ml-3">
+            {{ currentSlot.prompt }}
+          </v-card-title>
         </v-img>
       </v-card>
     </v-dialog>
@@ -283,6 +292,7 @@
                 whiteSpace: 'pre-line'
               },
               text: {
+                keyword: 'Take the Stairs',
                 sample: `"I'm going to kill Guren," he muttered.`,
                 extended: `"I'm going to kill Guren," he muttered.\n\n"Pardon?"`,
                 full: `It was 2 AM, Yuu was about to fall asleep waiting for the elevator, and everything was Guren's fault.
@@ -344,7 +354,7 @@ Yuu had never been happier to take the stairs.`
                 pos: "30% -5vw",
               },
               css: {
-                color: "#fffce8"
+                color: "#555555"
               }
             },
           ]
@@ -354,6 +364,9 @@ Yuu had never been happier to take the stairs.`
         origin: 'center center'
       },
       computed: {
+        isLarge() {
+          return this.$vuetify.breakpoint.width > 768;
+        },
         dialogWidth() {
           return this.currentSlot.img ? this.currentSlot.img.width : '800';
         }
