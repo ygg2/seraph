@@ -84,6 +84,39 @@
           </v-col>
         </v-row>
       </v-sheet>
+
+      <v-row style="min-height:700px">
+        <v-col cols="12" sm="auto">
+          <v-date-picker
+            v-model="date"
+            min="2020-04-20"
+            max="2020-05-13"
+            color="red lighten-3"
+            @change="viewDateSlot"
+          ></v-date-picker>
+        </v-col>
+        <v-col>
+          <v-row justify="center">
+            <v-card v-if="sideSlot.text" :style="sideSlot.css">
+              <v-card-subtitle>{{ sideSlot.text.extended }}</v-card-subtitle>
+              <v-divider></v-divider>
+              <v-card-title>{{ sideSlot.text.keyword }}</v-card-title>
+              <v-card-text>{{ sideSlot.text.full }}</v-card-text>
+            </v-card>
+            <v-img
+              v-else
+              :src="sideSlot.img.src"
+              :max-width="sideSlot.img.width"
+            ></v-img>
+          </v-row>
+        </v-col>
+        <v-col cols="12" sm="auto">
+          <v-card>
+            <v-card-title>{{ sideSlot.prompt }}</v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
+
     </v-container>
     <v-dialog
       v-model="showSlot"
@@ -113,7 +146,6 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
   <script>
-    // want: calendar picker to see entry by day
     var app = new Vue({
       el: '#app',
       vuetify: new Vuetify(),
@@ -126,7 +158,7 @@
           [
             {
               prompt: 'Vulnerable',
-              filled: true,
+              filled: 24,
               img: {
                 src: 'vulnerable.png',
                 width: '450',
@@ -151,7 +183,7 @@
             },
             {
               prompt: 'Artist AU',
-              filled: true,
+              filled: 27,
               img: {
                 src: 'artists.jpg',
                 width: '779',
@@ -171,7 +203,7 @@
             },
             {
               prompt: 'Soulmates AU',
-              filled: true,
+              filled: 21,
               img: {
                 src: 'soulmates.png',
                 width: '800',
@@ -188,7 +220,7 @@
             },
             {
               prompt: 'Canon Divergence',
-              filled: true,
+              filled: 28,
               img: {
                 src: 'meka.png',
                 width: '600',
@@ -204,7 +236,7 @@
             },
             {
               prompt: 'Neko',
-              filled: true,
+              filled: 20,
               img: {
                 src: 'neko.png',
                 width: '450',
@@ -237,7 +269,7 @@
           [
             {
               prompt: 'Bed sharing',
-              filled: true,
+              filled: 23,
               img: {
                 src: 'bed_share.png',
                 width: '600',
@@ -248,7 +280,7 @@
             },
             {
               prompt: 'Royal AU',
-              filled: true,
+              filled: 25,
               img: {
                 src: 'royalau.png',
                 width: '800',
@@ -287,7 +319,7 @@
             },
             {
               prompt: 'Isolated/trapped',
-              filled: true,
+              filled: 26,
               css: {
                 whiteSpace: 'pre-line'
               },
@@ -346,7 +378,7 @@ Yuu had never been happier to take the stairs.`
             },
             {
               prompt: 'Role reversal',
-              filled: true,
+              filled: 22,
               img: {
                 src: "squad.png",
                 width: "800",
@@ -361,7 +393,9 @@ Yuu had never been happier to take the stairs.`
         ],
         showSlot: false,
         currentSlot: {},
-        origin: 'center center'
+        sideSlot: {},
+        origin: 'center center',
+        date: '2020-04-20'
       },
       computed: {
         isLarge() {
@@ -378,7 +412,21 @@ Yuu had never been happier to take the stairs.`
             this.currentSlot = slot;
             this.showSlot = true;
           }
+        },
+        viewDateSlot(date) {
+          let day = parseInt(date.split('-')[2], 10);
+          for (let row of this.rows) {
+            for (let slot of row) {
+              if (day == slot.filled) {
+                this.sideSlot = slot;
+                break;
+              }
+            }
+          }
         }
+      },
+      created() {
+        this.sideSlot = this.rows[2][1];
       },
       mounted() {
         let prompt = window.location.hash.slice(1)
