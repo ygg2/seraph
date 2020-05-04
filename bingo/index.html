@@ -22,10 +22,14 @@
   <style>
     [v-cloak]   { display: none; }
     .v-responsive__content { width: auto !important; }
+    .bingo-card { padding-bottom: 12px !important; }
     .bingo-row { padding: 12px 0 0 12px !important; }
     .bingo-col { margin-right: 12px !important; }
     .bingo-prompt { padding: 8px 0 !important; line-height: 1em !important; }
     @media (max-width: 768px) {
+      .bingo-card { padding-bottom: 4px !important ;}
+      .bingo-row { padding: 4px 0 0 4px !important; }
+      .bingo-col { margin-right: 4px !important; }
       .bingo-prompt { padding: 4px 0 !important; font-size: .7rem !important; }
     }
   </style>
@@ -38,7 +42,7 @@
   <v-content class="yellow lighten-4">
     <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     <v-container>
-      <v-sheet color="white" class="pb-3" elevation="4">
+      <v-sheet color="white" class="bingo-card" elevation="4">
         <v-row v-for="row, i of rows" :key="i" no-gutters class="bingo-row">
           <v-col
             v-for="slot, j of row" :key="j"
