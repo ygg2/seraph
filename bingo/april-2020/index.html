@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta property="og:title" content="MikaYuu Bingo 2020">
   <meta property="og:type" content="website">
-  <meta property="og:image" itemprop="image" content="https://ygg2.github.io/seraph/bingo/icon.png">
-  <meta property="og:image:secure_url" content="https://ygg2.github.io/seraph/bingo/icon.png">
+  <meta property="og:image" itemprop="image" content="https://ygg2.github.io/seraph/bingo/april-2020/icon.png">
+  <meta property="og:image:secure_url" content="https://ygg2.github.io/seraph/bingo/april-2020/icon.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="256">
   <meta property="og:image:height" content="256">
   <meta property="og:image:alt" content="Mika and Yuu playing bingo">
-  <meta property="og:url" content="https://ygg2.github.io/seraph/bingo/">
+  <meta property="og:url" content="https://ygg2.github.io/seraph/bingo/april-2020/">
   <meta property="og:description" content="Ygg's MikaYuu Bingo card">
   <link href="icon.ico" type="image/x-icon" rel="shortcut icon">
 
@@ -39,7 +39,7 @@
 <body>
 
 <v-app id="app" v-cloak>
-  <v-content class="yellow lighten-4">
+  <v-main class="yellow lighten-4">
     <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     <v-container>
       <v-sheet color="white" class="bingo-card" elevation="4">
@@ -144,10 +144,10 @@
         </v-img>
       </v-card>
     </v-dialog>
-  </v-content>
+  </v-main>
 </v-app>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
   <script>
     var app = new Vue({
@@ -156,7 +156,8 @@
       data: {
         breadcrumbs: [
           { text: 'Seraph', href: '/seraph' },
-          { text: 'Bingo 2020', disabled: true }
+          { text: 'Bingo', href: '/seraph/bingo'},
+          { text: 'April 2020', disabled: true }
         ],
         rows: [
           [
