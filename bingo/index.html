@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta property="og:title" content="MikaYuu Bingo 2020">
+  <meta property="og:type" content="website">
+  <meta property="og:image" itemprop="image" content="https://ygg2.github.io/seraph/bingo/april-2020/icon.png">
+  <meta property="og:image:secure_url" content="https://ygg2.github.io/seraph/bingo/april-2020/icon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="256">
+  <meta property="og:image:height" content="256">
+  <meta property="og:image:alt" content="Mika and Yuu playing bingo">
+  <meta property="og:url" content="https://ygg2.github.io/seraph/bingo/">
+  <meta property="og:description" content="Ygg's MikaYuu Bingo cards">
+  <link href="icon.ico" type="image/x-icon" rel="shortcut icon">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+  <style>
+    [v-cloak]   { display: none; }
+  </style>
+  <title>MikaYuu Bingo 2020</title>
+</head>
+
+<body>
+
+<v-app id="app" v-cloak>
+  <v-main class="yellow lighten-4">
+    <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
+    <v-container>
+      <v-banner>Notice: This page is under construction. Check <a href="./april-2020">here</a> for the old bingo page.</v-banner>
+      <v-sheet color="white" elevation="4" height="500">
+        <v-calendar
+          :events="events"
+          type="month"
+          interval-height="100"
+        ></v-calendar>
+      </v-sheet>
+    </v-container>
+  </v-main>
+</v-app>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      vuetify: new Vuetify(),
+      data: {
+        breadcrumbs: [
+          { text: 'Seraph', href: '/seraph' },
+          { text: 'Bingo', disabled: true },
+        ],
+        events: [
+          {
+            name: 'Bingo Start!',
+            start: '2020-07-20',
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+
+</html>
