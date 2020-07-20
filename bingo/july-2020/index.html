@@ -13,21 +13,17 @@
     <meta property="og:image:alt" content="Mika and Yuu playing bingo">
     <meta property="og:url" content="https://ygg2.github.io/seraph/bingo/july-2020">
     <meta property="og:description" content="Ygg's MikaYuu Bingo card">
-    <link href="../icon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="icon.ico" type="image/x-icon" rel="shortcut icon">
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.3.4/dist/vuetify.min.css" rel="stylesheet">
     <style>
       [v-cloak] {
         display: none;
       }
       .v-responsive__content {
         width: auto !important;
-      }
-      .bingo-prompt {
-        padding: 8px 0 !important;
-        line-height: 1em !important;
       }
       @media (max-width: 768px) {
         .bingo-prompt {
@@ -55,7 +51,7 @@
                 <v-card v-if="cards.has(prompt)" flat tile>
                   <v-img :src="cards.get(prompt)" aspect-ratio="1"></v-img>
                 </v-card>
-                <v-card v-else flat tile>
+                <v-card v-else flat tile class="bingo-prompt">
                   <v-responsive aspect-ratio="1" class="flex align-center">
                     <p class="text-center light-blue--text text--accent-1">
                       {{ prompt }}
@@ -109,7 +105,7 @@
             { text: 'July 2020', disabled: true },
           ],
           cardArray: [
-            ['FREE SPACE', '../icon.png']
+            ['FREE SPACE', 'free_space.png']
           ],
           cards: {},
           rows: [
@@ -124,6 +120,7 @@
           sideSlot: null,
           origin: 'center center',
           date: '2020-07-19',
+          sideDate: 0,
           start: 19
         },
         methods: {
@@ -136,13 +133,15 @@
           },
           viewDateSlot(date) {
             let day = parseInt(date.split('-')[2], 10);
-            let entry = this.cardArray[day - this.start];
+            let index = day - this.start;
+            if (day < this.start) index = 31 - this.start + day;
+            let entry = this.cardArray[index];
             if (entry) this.sideSlot = entry[0];
           },
         },
         created() {
           this.cards = new Map(this.cardArray);
-          this.sideSlot = this.cardArray[0][0];
+          this.sideSlot = this.cardArray[this.sideDate][0];
         },
         mounted() {
           let hash = window.location.hash;
