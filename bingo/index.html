@@ -21,6 +21,7 @@
   <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
   <style>
     [v-cloak]   { display: none; }
+    a { text-decoration: none; }
   </style>
   <title>MikaYuu Bingo 2020</title>
 </head>
@@ -31,14 +32,49 @@
   <v-main class="yellow lighten-4">
     <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     <v-container>
-      <v-banner>Notice: This page is under construction. Check <a href="./april-2020">here</a> for the old bingo page.</v-banner>
-      <v-sheet color="white" elevation="4" height="500">
-        <v-calendar
-          :events="events"
-          type="month"
-          interval-height="100"
-        ></v-calendar>
-      </v-sheet>
+      <v-row>
+        <v-col cols="12" sm="6">
+          <v-card>
+            <a :href="pages[0].link">
+              <v-img :src="pages[0].image"></v-img>
+            </a>
+            <v-card-title>{{ pages[0].title }}</v-card-title>
+          </v-card>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <h1 class="title mb-3">MikaYuu Bingo</h1>
+          <a v-for="page of pages" :href="page.link">
+            <v-card class="mb-3">
+              <div class="d-flex flex-no-wrap justify-space-between">
+                <v-card-title>{{ page.title }}</v-card-title>
+                <v-avatar class="ma-3" size="125" tile>
+                  <v-img :src="page.image"></v-img>
+                </v-avatar>
+              </div>
+            </v-card>
+          </a>
+        </v-col>
+      </v-row>
+      <v-divider class="my-3"></v-divider>
+      <v-row>
+        <v-col cols="12" sm="4">
+          <p>This page is ygg's collection of entries for MikaYuu Bingo!</p>
+          <p>Check out the event on twitter <a href="https://twitter.com/MikayuuBingo">@MikayuuBingo!</a></p>
+          <a href="https://twitter.com/MikayuuBingo/status/1285017176903168001">
+            <v-img src="https://pbs.twimg.com/media/EdVAEMaWAAAUdDL?format=png&name=large"></v-img>
+          </a>
+        </v-col>
+        <v-col cols="12" sm="8">
+          <p class="title">Calendar</p>
+          <v-sheet color="white" elevation="4" height="500">
+            <v-calendar
+              :events="events"
+              type="month"
+              interval-height="100"
+            ></v-calendar>
+          </v-sheet>
+        </v-col>
+      </v-row>
     </v-container>
   </v-main>
 </v-app>
@@ -54,10 +90,26 @@
           { text: 'Seraph', href: '/seraph' },
           { text: 'Bingo', disabled: true },
         ],
+        pages: [
+          {
+            title: 'July 2020',
+            image: 'july-2020/free_space.png',
+            link: './july-2020'
+          },
+          {
+            title: 'April 2020',
+            image: 'april-2020/free_space.png',
+            link: './april-2020'
+          }
+        ],
         events: [
           {
             name: 'Bingo Start!',
             start: '2020-07-20',
+          },
+          {
+            name: 'Bingo End',
+            start: '2020-08-12'
           }
         ]
       }
