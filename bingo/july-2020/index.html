@@ -49,17 +49,17 @@
                 :key="j"
                 @click.stop="viewSlot(prompt, i, j)"
                 tabindex="0"
+                class="d-flex align-start"
               >
-                <v-card v-if="cards.has(prompt)" flat tile>
-                  <v-img :src="cards.get(prompt)" aspect-ratio="1"></v-img>
-                </v-card>
-                <v-card v-else flat tile class="bingo-prompt">
-                  <v-responsive aspect-ratio="1" class="flex align-center">
-                    <p class="text-center light-blue--text text--accent-1">
-                      {{ prompt }}
-                    </p>
-                  </v-responsive>
-                </v-card>
+                
+                <img class="flex" v-if="cards.has(prompt)" :src="cards.get(prompt)">
+               
+                <v-responsive v-else aspect-ratio="1" class="bingo-prompt flex align-center">
+                  <p class="text-center light-blue--text text--accent-1">
+                    {{ prompt }}
+                  </p>
+                </v-responsive>
+
               </v-col>
             </v-row>
           </v-sheet>
