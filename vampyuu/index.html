@@ -79,15 +79,19 @@
   
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
   <script>
     Vue.component('image-box', {
       props: {
-        src: String
+        src: Object,
+        viewed: {
+          type: Boolean,
+          default: false
+        }
       },
       template: `
       <div class="tile is-child box" @click="$root.openModal(src)">
-        <img class="cover-tile" :src="src.src" loading="lazy">
+        <img class="cover-tile image is-square" src="" :data-src="src.src" loading="lazy">
       </div>
       `,
     })
@@ -98,8 +102,8 @@
       },
       template: `
       <div class="tile is-ancestor">
-        <div v-for="img of images" :key="img" class="tile is-parent">
-          <image-box :src="img"></image-box>
+        <div v-for="img of images" :key="img.src" class="tile is-parent">
+          <image-box :src="img" :viewed="img.loaded"></image-box>
         </div>
       </div>
       `
@@ -209,6 +213,43 @@
       `
     })
 
+    Vue.component('box-layout-7', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical is-3">
+          <div class="tile is-parent is-12">
+            <image-box :src="images[0]"></image-box>
+          </div>
+          <div class="tile is-parent">
+            <image-box :src="images[1]"></image-box>
+          </div>
+        </div>
+        <div class="tile is-vertical">
+          <div class="tile">
+            <div class="tile is-8 is-parent">
+              <image-box :src="images[2]"></image-box>
+            </div>
+            <div class="tile is-vertical is-parent">
+              <image-box :src="images[3]"></image-box>
+              <image-box :src="images[4]"></image-box>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="tile is-4 is-parent">
+              <image-box :src="images[5]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[6]"></image-box>
+            </div>
+          </div>
+        </div>
+      </div>
+      `
+    })
+
     Vue.component('search-bar', {
       props: {
         images: Array
@@ -243,6 +284,7 @@
             ['5 min', /(?:5|five).?min/],
             ['blood drinking', /blood ?(?:drink|shar|suck)|wine/],
             ['come crashing', /come crashing|\bcc\b/],
+            ['cherry picking', /cherry/],
             ['color', /color(?:ed|ing)?/],
             ['lineless paper', /(?:unlined|unruled)|paper (?:without|no) lines/]
           ])
@@ -277,8 +319,68 @@
         queries: new Set(),
         results: [],
         invalidTag: false,
+        // tags beach, only yuu, mika, vampire mika, reversal, 5 min, blood drinking, come crashing, cherry picking, color, lineless paper
         groups: [
-        {
+          {
+            name: 'Bingo 1',
+            layout: 'box-layout-7',
+            images: [
+              { src: '../bingo/april-2020/free_space.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/neko.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/soulmates.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/bed_share.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/online_school.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/royalau.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/squad.png', tags: ['mika', 'reversal', 'color', 'lineless paper'] },
+            ]
+          },
+          {
+            name: 'Bingo 2',
+            layout: 'box-layout-4',
+            images: [
+              { src: '../bingo/april-2020/pining.png', tags: ['mika', 'reversal', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/divine.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/bythebook.png', tags: ['mika', 'reversal', 'color', 'lineless paper'] },
+              { src: '../bingo/april-2020/artists.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+
+            ]
+          },
+          {
+            name: 'Doodle',
+            layout: 'box-layout-5',
+            images: [
+              { src: 'axolotl.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'fandom_likes.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'shoulder_vamp_yuu.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'sideways.jpg', tags: ['mika', 'vampire mika', 'blood drinking'] },
+              { src: 'vamp_yuu2.jpg', tags: ['only yuu'] }
+            ]
+          },
+          {
+            name: 'Bot',
+            layout: 'box-layout-7',
+            images: [
+              { src: 'vampyuubot.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'vampyuu5.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'vampyuu1.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'vampyuu3.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'vampyuu4.png', tags: ['color', 'lineless paper'] },
+              { src: 'vampyuu2.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'in_case.png', tags: ['only yuu', 'color', 'lineless paper'] },
+            ]
+          },
+          {
+            name: 'Digital Doodle',
+            layout: 'box-layout-5',
+            images: [
+              { src: 'vampyuuremind.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'ex_main.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'cherry_essay_ruin.png', tags: ['mika', 'vampire mika', 'cherry picking', 'color', 'lineless paper'] },
+              { src: 'vampyuuremind2.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'weakness.png', tags: ['only yuu', 'color', 'lineless paper'] }
+            ]
+          },
+          {
             name: 'General 3',
             layout: 'box-layout-3',
             images: [
@@ -376,6 +478,23 @@
               }
             }
           }
+        }
+      },
+      mounted() {
+        // lazy load
+        const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const lazyImage = entry.target;
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.className = 'cover-tile';
+            observer.unobserve(lazyImage);
+          }
+        });
+        }, { threshold: 0.1 });
+        let targets = document.querySelectorAll('img');
+        for (let target of targets) {
+          observer.observe(target);
         }
       }
     })
