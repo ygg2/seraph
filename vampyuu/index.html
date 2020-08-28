@@ -66,7 +66,8 @@
             v-for="group of groups"
             :key="group.name"
           >
-            <component :is="group.layout" :images="group.images"></component>
+            <component :is="group.layout" :images="group.images" class="group">
+            </component>
           </div>
         </div>
       </div>
@@ -79,7 +80,7 @@
   
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
   <script>
     Vue.component('image-box', {
       props: {
@@ -91,7 +92,7 @@
       },
       template: `
       <div class="tile is-child box" @click="$root.openModal(src)">
-        <img class="cover-tile image is-square" src="" :data-src="src.src" loading="lazy">
+        <img class="cover-tile image is-square" src="" :data-src="src.src">
       </div>
       `,
     })
@@ -356,6 +357,29 @@
             ]
           },
           {
+            name: 'MS Paint',
+            layout: 'box-layout-4',
+            images: [
+              { src: 'mari.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'nova.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'ana.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'heelys.png', tags: ['only yuu', 'color', 'lineless paper'] },
+            ]
+          },
+          {
+            name: '5-Minute Mikayuu 2',
+            layout: 'box-layout-7',
+            images: [
+              { src: 'cups.jpg', tags: ['mika', 'vampire mika', '5 min', 'blood drinking'] },
+              { src: 'uniforms.jpg', tags: ['mika', 'vampire mika', '5 min'] },
+              { src: '100km.jpg', tags: ['mika', '5 min'] },
+              { src: 'caps.jpg', tags: ['mika', '5 min'] },
+              { src: 'witch.jpg', tags: ['mika', '5 min'] },
+              { src: 'moon.jpg', tags: ['mika', 'vampire mika', '5 min'] },
+              { src: 'stabby.jpg', tags: ['mika', 'reversal', '5 min'] },
+            ]
+          },
+          {
             name: 'Bingo 1',
             layout: 'box-layout-7',
             images: [
@@ -517,16 +541,19 @@
       mounted() {
         // lazy load
         const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const lazyImage = entry.target;
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.className = 'cover-tile';
-            observer.unobserve(lazyImage);
-          }
-        });
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const group = entry.target;
+              const images = group.getElementsByTagName('img');
+              for (let image of images) {
+                image.src = image.dataset.src;
+                image.className = 'cover-tile';
+              }
+              observer.unobserve(group);
+            }
+          });
         }, { threshold: 0.1 });
-        let targets = document.querySelectorAll('img');
+        let targets = document.querySelectorAll('.group');
         for (let target of targets) {
           observer.observe(target);
         }
