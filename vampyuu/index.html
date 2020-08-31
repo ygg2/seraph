@@ -155,17 +155,15 @@
       },
       template: `
       <div class="tile is-ancestor">
-        <div class="tile">
-          <div class="tile is-parent">
-            <image-box :src="images[0]"></image-box>
+        <div class="tile is-parent is-3">
+          <image-box :src="images[0]"></image-box>
+        </div>
+        <div class="tile is-vertical is-3">
+          <div class="tile is-parent is-12">
+            <image-box :src="images[1]"></image-box>
           </div>
-          <div class="tile is-vertical">
-            <div class="tile is-parent is-12">
-              <image-box :src="images[1]"></image-box>
-            </div>
-            <div class="tile is-parent">
-              <image-box :src="images[2]"></image-box>
-            </div>
+          <div class="tile is-parent">
+            <image-box :src="images[2]"></image-box>
           </div>
         </div>
         <div class="tile is-vertical">
@@ -340,10 +338,9 @@
           },
           {
             name: 'Vamp Yuu Weekend',
-            layout: 'box-layout-4',
+            layout: 'box-layout-3',
             images: [
               { src: 'for_ana.jpg', tags: ['only yuu', 'color', 'lineless paper']},
-              { src: 'notepad.png', tags: ['only yuu', 'lineless paper'] },
               { src: 'wowimlate_final.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
               { src: 'modernau.jpg', tags: ['only yuu', 'color', 'lineless paper'] }
             ]
@@ -364,10 +361,11 @@
           },
           {
             name: 'MS Paint',
-            layout: 'box-layout-4',
+            layout: 'box-layout-5',
             images: [
-              { src: 'mari.png', tags: ['only yuu', 'color', 'lineless paper'] },
               { src: 'nova.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'mari.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'notepad.png', tags: ['only yuu', 'lineless paper'] },
               { src: 'ana.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
               { src: 'heelys.png', tags: ['only yuu', 'color', 'lineless paper'] },
             ]
