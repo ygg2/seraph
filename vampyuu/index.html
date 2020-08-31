@@ -159,9 +159,13 @@
           <div class="tile is-parent">
             <image-box :src="images[0]"></image-box>
           </div>
-          <div class="tile is-parent is-vertical">
-            <image-box :src="images[1]"></image-box>
-            <image-box :src="images[2]"></image-box>
+          <div class="tile is-vertical">
+            <div class="tile is-parent is-12">
+              <image-box :src="images[1]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[2]"></image-box>
+            </div>
           </div>
         </div>
         <div class="tile is-vertical">
@@ -324,12 +328,14 @@
         groups: [
           {
             name: 'General 4',
-            layout: 'box-layout-any',
+            layout: 'box-layout-6',
             images: [
-              { src: 'hahahaha.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
-              { src: 'blood_fountain.jpg', tags: ['mika', 'vampire mika', 'color', 'blood drinking', 'lineless paper'] },
-              { src: 'header.png', tags: ['only yuu', 'color', 'lineless paper']},
+              { src: 'vertical.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'kissu.jpg', tags: ['mika', 'vampire mika' ]},
               { src: 'notbingo.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'blood_fountain.jpg', tags: ['mika', 'vampire mika', 'color', 'blood drinking', 'lineless paper'] },
+              { src: 'hahahaha.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'header.png', tags: ['only yuu', 'color', 'lineless paper']}
             ]
           },
           {
