@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/seraph/mikayuu-week-2020/static/css/main.7d8abab7.chunk.css",
+    "main.js": "/seraph/mikayuu-week-2020/static/js/main.1a48cd4d.chunk.js",
+    "main.js.map": "/seraph/mikayuu-week-2020/static/js/main.1a48cd4d.chunk.js.map",
+    "runtime-main.js": "/seraph/mikayuu-week-2020/static/js/runtime-main.a3d2ec36.js",
+    "runtime-main.js.map": "/seraph/mikayuu-week-2020/static/js/runtime-main.a3d2ec36.js.map",
+    "static/js/2.18e77969.chunk.js": "/seraph/mikayuu-week-2020/static/js/2.18e77969.chunk.js",
+    "static/js/2.18e77969.chunk.js.map": "/seraph/mikayuu-week-2020/static/js/2.18e77969.chunk.js.map",
+    "index.html": "/seraph/mikayuu-week-2020/index.html",
+    "precache-manifest.f12d557407c5a337caa522eb8bb71df3.js": "/seraph/mikayuu-week-2020/precache-manifest.f12d557407c5a337caa522eb8bb71df3.js",
+    "service-worker.js": "/seraph/mikayuu-week-2020/service-worker.js",
+    "static/css/main.7d8abab7.chunk.css.map": "/seraph/mikayuu-week-2020/static/css/main.7d8abab7.chunk.css.map",
+    "static/js/2.18e77969.chunk.js.LICENSE.txt": "/seraph/mikayuu-week-2020/static/js/2.18e77969.chunk.js.LICENSE.txt",
+    "static/media/background.jpg": "/seraph/mikayuu-week-2020/static/media/background.ccbf58ba.jpg",
+    "static/media/illust.png": "/seraph/mikayuu-week-2020/static/media/illust.c55ab3a4.png",
+    "static/media/overlay.png": "/seraph/mikayuu-week-2020/static/media/overlay.5a123d1b.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a3d2ec36.js",
+    "static/js/2.18e77969.chunk.js",
+    "static/css/main.7d8abab7.chunk.css",
+    "static/js/main.1a48cd4d.chunk.js"
+  ]
+}
