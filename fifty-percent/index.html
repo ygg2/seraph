@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <style>
+      [v-cloak] { display: none; }
+      p { font-family: 'Source Sans Pro', sans-serif; }
+      .paper { max-width: 800px; margin: 0 auto; font-size: 1.2rem; }
+      .caption { color: #333333; white-space: pre-line; padding: 1em; }
+      .ana { color: #5b1b6b }
+      .ygg { color: #124486; }
+    </style>
+    <title>50% Accurate Seraph of the End</title>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <div class="paper" v-html="content"></div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        content: '',
+        authors: {
+          a: 'ana',
+          y: 'ygg'
+        }
+      },
+      mounted() {
+        fetch('fifty-percent.txt')
+          .then(response => response.text())
+          .then(text => {
+            this.content = text.split('\n\n').map(line => {
+              let who = line[0];
+              let what = line.slice(2);
+              if (who == '.') {
+                return `<p class="caption">${what}</p>`
+              }
+              return `<p class="${this.authors[who]}">${what}</p>`
+            }).join('')
+          });
+      }
+    })
+  </script>
+</html>
