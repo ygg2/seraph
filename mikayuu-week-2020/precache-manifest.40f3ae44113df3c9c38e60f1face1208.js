@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "15d4778623e459a75cff661a209cbfe7",
+    "revision": "ad0a90eb7d539d44b052f2837b6eefd9",
     "url": "/seraph/mikayuu-week-2020/index.html"
   },
   {
-    "revision": "9ddc85d69031a271710c",
+    "revision": "e75c76d26139ee2e1c2b",
     "url": "/seraph/mikayuu-week-2020/static/css/main.1f3328c4.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/seraph/mikayuu-week-2020/static/js/2.dede157f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9ddc85d69031a271710c",
-    "url": "/seraph/mikayuu-week-2020/static/js/main.8de6bac9.chunk.js"
+    "revision": "e75c76d26139ee2e1c2b",
+    "url": "/seraph/mikayuu-week-2020/static/js/main.c52bb30d.chunk.js"
   },
   {
     "revision": "69b7199828dede961fe8",
@@ -72,8 +72,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/seraph/mikayuu-week-2020/static/media/illust.5a987feb.png"
   },
   {
-    "revision": "8f2a3e02fb09fc6603d5f6a4ddbfae6f",
-    "url": "/seraph/mikayuu-week-2020/static/media/illust.8f2a3e02.png"
+    "revision": "8ebaeb0d9e01ca82b4287a8fdb4dfadd",
+    "url": "/seraph/mikayuu-week-2020/static/media/illust.8ebaeb0d.png"
   },
   {
     "revision": "c55ab3a40413655c81bcdb572205e798",
