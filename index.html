@@ -21,7 +21,7 @@
         <v-toolbar-title>Seraph of the End Stuff</v-toolbar-title>
       </v-app-bar>
   
-      <v-content>
+      <v-main>
         <v-container>
           <v-row align-content="stretch">
             <v-col v-for="card of cards" :key="card[0]" :md="card[1]">
@@ -29,7 +29,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-content>
+      </v-main>
   
     </v-app>
   </div>
@@ -108,6 +108,7 @@
       vuetify: new Vuetify(),
       data: {
         cards: [
+          ["mikayuuweek2020", 12],
           ["bingo", 7],
           ["serapoke", 5],
           ["fivemin", 4],
@@ -117,6 +118,14 @@
           ["vampyuu", 4]
         ],
         cardData: {
+          mikayuuweek2020: {
+            style: 1,
+            title: "Mikayuu Week 2020",
+            image: {
+              src: "mikayuu-week-2020/planet_together.jpg"
+            },
+            link: "mikayuu-week-2020"
+          },
           bingo: {
             title: "Mikayuu Bingo 2020",
             image: {

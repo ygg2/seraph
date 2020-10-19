@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "07b1ac2001e7ec41f14e6873a662eb43",
+    "revision": "d39ed319df1a2e0272076823353cb549",
     "url": "/seraph/mikayuu-week-2020/index.html"
   },
   {
-    "revision": "dd74d914b937e12cd084",
+    "revision": "ae45cfbf89eb8a69da6d",
     "url": "/seraph/mikayuu-week-2020/static/css/main.1f3328c4.chunk.css"
   },
   {
-    "revision": "6c5dc9b0a987caf2f3b1",
-    "url": "/seraph/mikayuu-week-2020/static/js/2.dede157f.chunk.js"
+    "revision": "31e6594ce4d12ff7a9fb",
+    "url": "/seraph/mikayuu-week-2020/static/js/2.75c37bf3.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/seraph/mikayuu-week-2020/static/js/2.dede157f.chunk.js.LICENSE.txt"
+    "url": "/seraph/mikayuu-week-2020/static/js/2.75c37bf3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dd74d914b937e12cd084",
-    "url": "/seraph/mikayuu-week-2020/static/js/main.246749ce.chunk.js"
+    "revision": "ae45cfbf89eb8a69da6d",
+    "url": "/seraph/mikayuu-week-2020/static/js/main.47039b40.chunk.js"
   },
   {
     "revision": "69b7199828dede961fe8",
@@ -36,6 +36,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/seraph/mikayuu-week-2020/static/media/background.928be5fc.jpg"
   },
   {
+    "revision": "b1230ab2282f2d0c93c8b9587e241d34",
+    "url": "/seraph/mikayuu-week-2020/static/media/background.b1230ab2.jpg"
+  },
+  {
     "revision": "c973d69b633e60f597b4a5d72397b2c3",
     "url": "/seraph/mikayuu-week-2020/static/media/background.c973d69b.jpg"
   },
@@ -50,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "f2d4f22cffba9b569a6f25fa2617d3f4",
     "url": "/seraph/mikayuu-week-2020/static/media/background.f2d4f22c.jpg"
+  },
+  {
+    "revision": "14fd7e8a604ff45afda0401de73dd45e",
+    "url": "/seraph/mikayuu-week-2020/static/media/illust.14fd7e8a.png"
   },
   {
     "revision": "1ad9cd64923fa67ab86de1b032bef872",
@@ -78,6 +86,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c55ab3a40413655c81bcdb572205e798",
     "url": "/seraph/mikayuu-week-2020/static/media/illust.c55ab3a4.png"
+  },
+  {
+    "revision": "12661e3b4be19294d5d16f3ef483e286",
+    "url": "/seraph/mikayuu-week-2020/static/media/overlay.12661e3b.png"
   },
   {
     "revision": "1fcaedd2387fe008b0a01a125990b5f2",

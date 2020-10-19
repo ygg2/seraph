@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/seraph/mikayuu-week-2020/precache-manifest.28d3669ac16487dc1b69f203b4a05dd2.js"
+  "/seraph/mikayuu-week-2020/precache-manifest.d7984e21aaa53a65ce5984684d11d7e8.js"
 );
 
 self.addEventListener('message', (event) => {
