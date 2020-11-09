@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Images</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <style>[v-cloak] { display: none; }</style>
+  </head>
+  <body>
+    <main id="app" class="section pt-4">
+      <div v-for="character of images" :key="character[0]">
+        <p>{{ character[0] }}</p>
+        <div class="columns is-mobile is-multiline is-variable is-1 py-4">
+          <div v-for="img of character[1]" :key="img" class="column is-narrow">
+            <button class="button is-white is-paddingless" @click="copy(img)">
+              <img :src="img" style="max-width: 48px" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+  <script>
+let imgur_images = new Map ([
+  ['izuru', [
+    'https://i.imgur.com/gCEu2cb.jpg',
+    'https://i.imgur.com/wHCQHAS.png',
+    'https://i.imgur.com/SCxxNe7.jpg',
+    'https://i.imgur.com/NOYBbdd.jpg',
+    'https://i.imgur.com/AAriBPa.jpg',
+    'https://i.imgur.com/3ZJjpBD.png',
+    'https://i.imgur.com/4H0PBcj.jpg',
+    'https://i.imgur.com/vmFA7y8.jpg',
+    'https://i.imgur.com/jASJNr8.png',
+    'https://i.imgur.com/HXirFvx.jpg',
+    'https://i.imgur.com/Dg0EF3X.jpg',
+    'https://i.imgur.com/TFN0R3v.jpg',
+    'https://i.imgur.com/TNsfQhh.jpg',
+    'https://i.imgur.com/lVIZiZo.png',
+    'https://i.imgur.com/9o83rJm.png',
+    'https://i.imgur.com/4mzSu3u.png',
+    'https://i.imgur.com/KpKvzDi.png'
+  ]],
+  ['yuu', [
+    'https://i.imgur.com/fwp0QQq.jpg',
+    'https://i.imgur.com/QdyQgRY.jpg',
+    'https://i.imgur.com/mNirW7H.jpg',
+    'https://i.imgur.com/twRXRTg.jpg',
+    'https://i.imgur.com/jyw77Ap.jpg',
+    'https://i.imgur.com/bLhb5cr.jpg',
+    'https://i.imgur.com/pDjcd9s.png',
+    'https://i.imgur.com/2EtTKKy.png',
+    'https://i.imgur.com/j569Oma.png',
+    'https://i.imgur.com/e4v33t1.jpg',
+    'https://i.imgur.com/3CxojTU.jpg',
+    'https://i.imgur.com/3okXTnM.jpg',
+    'https://i.imgur.com/kh222Qi.png',
+    'https://i.imgur.com/eNZzNJx.png',
+    'https://i.imgur.com/estupoi.jpg',
+    'https://i.imgur.com/tTmR9x7.jpg',
+    'https://i.imgur.com/eJhnvl4.png',
+    'https://i.imgur.com/MUluYil.jpeg',
+    'https://i.imgur.com/uXSa4Fb.jpeg',
+    'https://i.imgur.com/YuuxgQY.jpeg',
+    'https://i.imgur.com/dqsvF1X.jpeg',
+    'https://i.imgur.com/q5IkVLF.png',
+    'https://i.imgur.com/NoHC8Dx.png',
+    'https://i.imgur.com/9KdLVR0.png',
+    'https://i.imgur.com/tvJG0P7.png',
+  ]],
+  ['mika', [
+    'https://i.imgur.com/MlADl5K.jpg',
+    'https://i.imgur.com/o8OXoSb.jpg',
+    'https://i.imgur.com/GUxKOX7.jpg',
+    'https://i.imgur.com/Bcg2gEk.jpg',
+    'https://i.imgur.com/zTpAY6d.jpg',
+    'https://i.imgur.com/6dQ4nB2.jpg',
+    'https://i.imgur.com/DrZwFZo.png',
+    'https://i.imgur.com/zK2VFiT.jpg',
+    'https://i.imgur.com/vwfAGTF.png',
+    'https://i.imgur.com/0svfAMJ.png',
+    'https://i.imgur.com/GzNSRyz.jpg',
+    'https://i.imgur.com/ON14kmy.jpg',
+    'https://i.imgur.com/9zyuHpW.jpg',
+    'https://i.imgur.com/J4kH4xa.jpg',
+    'https://i.imgur.com/nXIHO7e.jpg',
+    'https://i.imgur.com/LDz5lc7.png',
+    'https://i.imgur.com/2FqvcZr.png',
+    'https://i.imgur.com/CtSRJGB.jpg',
+    'https://i.imgur.com/NJ7hNuc.jpeg',
+    'https://i.imgur.com/ZVZdfyI.jpeg',
+    'https://i.imgur.com/uJQDv1b.jpeg',
+    'https://i.imgur.com/hEy72k9.jpeg',
+    'https://i.imgur.com/s791k2e.jpeg',
+    'https://i.imgur.com/Xq265SD.jpeg',
+    'https://i.imgur.com/2bVd0j4.png',
+    'https://i.imgur.com/l3xxVfb.png',
+    'https://i.imgur.com/h9Z95pN.png',
+    'https://i.imgur.com/ELeByc1.png',
+  ]],
+  ['kittymika', [
+    'https://i.imgur.com/GCRZQLv.jpg',
+    'https://i.imgur.com/xIEa3Zr.jpg',
+    'https://i.imgur.com/kKBRp2u.png',
+    'https://i.imgur.com/aOOPKNK.png',
+    'https://i.imgur.com/w7hKXF4.png',
+    'https://i.imgur.com/WSavXNn.png',
+    'https://i.imgur.com/x8TGcPn.png',
+    'https://i.imgur.com/PvbtIxV.png',
+    'https://i.imgur.com/VfJjV6M.png',
+    'https://i.imgur.com/NGMvKDc.png',
+    'https://cdn.discordapp.com/attachments/741371822209237252/748984472015470772/J8ygvA7.gif', //'https://i.imgur.com/J8ygvA7.gif',
+    'https://i.imgur.com/qiIYEy2.jpg',
+    'https://i.imgur.com/qvaUIpq.png',
+    'https://i.imgur.com/pADTbQN.png',
+    'https://i.imgur.com/BIrzZD0.jpeg',
+    'https://i.imgur.com/fiCHpML.jpg',
+  ]],
+  ['mikayuu', [
+    'https://i.imgur.com/eSON36K.jpg',
+    'https://i.imgur.com/qBJ9i9g.jpg',
+    'https://i.imgur.com/GZyMb91.jpg',
+    'https://i.imgur.com/KTYIkuE.jpg',
+    'https://i.imgur.com/nuh0pHJ.jpg',
+    'https://i.imgur.com/HHCxRqP.png',
+    'https://i.imgur.com/xtTzgTX.jpg',
+    'https://i.imgur.com/GAh65gf.jpg',
+    'https://i.imgur.com/XbdVAjW.png',
+    'https://i.imgur.com/dOXQApC.png',
+    'https://i.imgur.com/w8SwzuI.jpg',
+    'https://i.imgur.com/vaLhIaB.png',
+    'https://i.imgur.com/6zaXJY4.png',
+    'https://i.imgur.com/Kx7Dwoh.png',
+    'https://i.imgur.com/TWztFkn.png',
+    'https://i.imgur.com/wnEJNVY.png',
+    'https://i.imgur.com/zLNEqdL.png',
+    'https://i.imgur.com/2QJdig7.png',
+    'https://i.imgur.com/fN1PByV.png',
+    'https://i.imgur.com/HfYKD0z.jpeg',
+    'https://i.imgur.com/uvfJSMp.png',
+    'https://i.imgur.com/wTgwBkL.png',
+    'https://i.imgur.com/Lkf7Tpe.png',
+    'https://i.imgur.com/oFlrEYg.jpeg',
+    'https://i.imgur.com/HaOi9sv.png',
+    'https://i.imgur.com/8Xu0bEb.jpeg',
+    'https://i.imgur.com/uTEqqR5.png',
+    'https://i.imgur.com/HaTLzMn.jpeg',
+    'https://i.imgur.com/RMR3jTt.jpeg',
+    'https://i.imgur.com/0BEXl1P.jpeg',
+    'https://i.imgur.com/IdkaOL7.jpeg',
+    'https://i.imgur.com/AF8x6Ji.jpeg',
+    'https://i.imgur.com/1zdNHl5.png',
+    'https://i.imgur.com/Kxp0C7u.png',
+    'https://i.imgur.com/XcnCg5V.png',
+    'https://i.imgur.com/M3IEeST.png',
+    'https://i.imgur.com/kVAgLRR.png',
+    'https://i.imgur.com/BeQX1dV.png',
+    'https://i.imgur.com/P3OqKnx.png',
+    'https://i.imgur.com/whuoGgX.png',
+    'https://i.imgur.com/RsjkEVU.png',
+  ]],
+  ['whale', [
+    'https://i.imgur.com/m9U8xdk.png',
+    'https://i.imgur.com/Z6PNCkj.png',
+    'https://i.imgur.com/DPVqx5T.png',
+    'https://i.imgur.com/8rf0ofQ.jpg',
+    'https://i.imgur.com/aijlmKK.jpg',
+    'https://i.imgur.com/2J4bFrX.png',
+    'https://i.imgur.com/63i0TFU.png',
+    'https://i.imgur.com/UVmfqGb.png',
+    'https://i.imgur.com/ozavavf.jpg',
+    'https://i.imgur.com/0ZOZpYA.jpg',
+    'https://i.imgur.com/YSCtkfe.jpg',
+    'https://i.imgur.com/1xT20J7.png',
+    'https://i.imgur.com/AHzc75H.jpg',
+    'https://i.imgur.com/qgcl5ei.jpg',
+    'https://i.imgur.com/g0t6Gy4.jpg',
+    'https://i.imgur.com/QKdqWED.png',
+    'https://i.imgur.com/Nean2kj.png',
+    'https://i.imgur.com/DeDjf0H.png',
+    'https://i.imgur.com/cVDIdPa.png',
+    'https://i.imgur.com/YiPFcPm.png',
+    'https://i.imgur.com/dz2iLvb.png',
+    'https://i.imgur.com/jlHXwE3.png',
+    'https://i.imgur.com/qisGRDW.png',
+    'https://i.imgur.com/QWjmUq6.jpg',
+    'https://i.imgur.com/13SM4zD.jpg',
+    'https://i.imgur.com/L0ewv3G.png',
+    'https://i.imgur.com/bu9NEO5.png',
+    'https://i.imgur.com/rlK4HPi.jpg',
+  ]],
+  ['vampyuu', [
+    'https://i.imgur.com/fbCzVTl.png',
+    'https://i.imgur.com/81r3wCb.png',
+    'https://i.imgur.com/zjMHOYe.png',
+    'https://i.imgur.com/Pv4FO1v.png',
+    'https://i.imgur.com/sYmjYg3.png',
+    'https://i.imgur.com/F21PUgX.png',
+    'https://i.imgur.com/5TaYSqk.png',
+    'https://i.imgur.com/Y7Qsqw0.jpg',
+    'https://i.imgur.com/YzmvFHl.gif',
+    'https://i.imgur.com/SshZUBG.png',
+    'https://i.imgur.com/VdtJ64K.png',
+    'https://i.imgur.com/wHWnl8n.png',
+    'https://i.imgur.com/kYvsYZE.png',
+    'https://i.imgur.com/y6QMAbO.png',
+    'https://i.imgur.com/elSHvTJ.png',
+    'https://i.imgur.com/ngsee8s.png',
+    'https://i.imgur.com/WuOErdZ.jpg',
+    'https://i.imgur.com/fLYQwEz.png',
+    'https://i.imgur.com/PPQfrSY.png',
+    'https://i.imgur.com/5oWHMyG.png',
+    'https://i.imgur.com/tJ6zdsQ.jpg',
+    'https://i.imgur.com/qeb7kQz.png',
+    'https://i.imgur.com/M0ZhFKV.png',
+    'https://i.imgur.com/cxwqf4m.png',
+    'https://i.imgur.com/RSLUG66.jpg',
+    'https://i.imgur.com/FpVMv2u.jpg',
+  ]],
+  ['vampmikayuu', [
+    'https://i.imgur.com/5P5Pa2N.png',
+    'https://i.imgur.com/stqdv5d.jpg',
+    'https://i.imgur.com/5SgA24p.jpg',
+    'https://i.imgur.com/TiGOeXQ.jpg',
+    'https://i.imgur.com/pyhCNCL.jpg',
+    'https://i.imgur.com/Mhkmeq4.png',
+    'https://i.imgur.com/UPZYQrp.jpg',
+    'https://i.imgur.com/96GTI3U.jpg',
+    'https://i.imgur.com/vNjA5fx.jpg',
+    'https://i.imgur.com/VueZUhQ.jpg',
+    'https://i.imgur.com/23CzOiX.png',
+    'https://i.imgur.com/7PIPvA1.png',
+    'https://i.imgur.com/HHJKryT.jpg',
+    'https://i.imgur.com/pbocgUe.png',
+    'https://i.imgur.com/YlzGQbv.png',
+    'https://i.imgur.com/TRNo4yW.png',
+    'https://i.imgur.com/uLXwpGg.png',
+    'https://i.imgur.com/KCOnKpJ.png',
+    'https://i.imgur.com/6ZdBSRj.png',
+    'https://i.imgur.com/UPYUeo0.png',
+    'https://i.imgur.com/PvpOqAM.jpg',
+    'https://i.imgur.com/kQqxjjf.jpg',
+    'https://i.imgur.com/6U0bxh1.jpg',
+    'https://i.imgur.com/M0pls4u.png',
+    'https://i.imgur.com/dEvvImI.jpeg',
+    'https://i.imgur.com/ziOcNbz.png',
+  ]],
+  ['yuma', [
+    'https://i.imgur.com/hoHaE1r.png',
+    'https://i.imgur.com/P4ZXqaG.png',
+    'https://i.imgur.com/KxxsjnD.png',
+    'https://i.imgur.com/MSVDBta.png',
+    'https://i.imgur.com/O6MV1mB.png',
+    'https://i.imgur.com/kJBFlec.png',
+    'https://i.imgur.com/qzq1Izg.png',
+    'https://i.imgur.com/gmGNZ8f.png',
+    'https://i.imgur.com/lpnvsBp.png',
+    'https://i.imgur.com/9UEcexE.png',
+    'https://i.imgur.com/gHHAkBM.png',
+    'https://i.imgur.com/enGKiF0.png',
+    'https://i.imgur.com/IrBcr2B.png',
+    'https://i.imgur.com/I3Aby39.png',
+    'https://i.imgur.com/EX3xUu6.png',
+    'https://i.imgur.com/emJeSnd.png',
+    'https://i.imgur.com/jKnEGjB.png',
+    'https://i.imgur.com/gbfj8dU.png',
+    'https://i.imgur.com/HOab9kQ.png',
+    'https://i.imgur.com/DZxU0HD.png',
+    'https://i.imgur.com/xyLpG4B.png',
+    'https://i.imgur.com/r7FM0Wi.png',
+    'https://i.imgur.com/pau16wO.png',
+    'https://i.imgur.com/DBDj938.png',
+    'https://i.imgur.com/F0UQBer.png',
+  ]]
+]);
+
+    imgur_images.forEach((c, k) => {
+      imgur_images.set(k, c.map(img => {
+        if (!img.includes('imgur')) return img;
+        let ext = -4;
+        if (img.endsWith('.jpeg')) ext = -5;
+        return img.slice(0, ext) + 's' + img.slice(ext)
+      }));
+    });
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        images: imgur_images
+      },
+      methods: {
+        copy(img) {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(img);
+          }
+        }
+      }
+    });
+  </script>
+</html>
