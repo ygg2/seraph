@@ -53,13 +53,13 @@
             </div>
           </div>
           <div class="field level-right">
-            <search-bar @search="search"></search-bar>
+            <search-bar @add-term="add" @search="search"></search-bar>
           </div>
         </div>
         <p v-show="invalidTag">No tags match that search.</p>
         <div class="tags">
           <span v-for="query of queries" class="tag is-medium">
-            {{ query }}&nbsp;
+            {{ query.flags.not ? 'not ' : ''}}{{ query.term }}&nbsp;
             <button class="delete is-small" @click="remove(query)"></button>
           </span>
         </div>
@@ -308,20 +308,22 @@
         search() {
           let query = this.query.toLowerCase();
           let invalidTag = true;
+          let flags = { not: query.startsWith('not') };
           if (this.aliases.get(query)) {
             invalidTag = false;
-            this.$emit('search', query);
+            this.$emit('add-term', { term: query, flags: flags });
           } else {
             for (let [key, value] of this.aliases) {
               if (value.test(query)) {
                 invalidTag = false;
                 if (key == 'mika' && this.aliases.get('vampire mika').test(query)) continue;
-                this.$emit('search', key);
+                this.$emit('add-term', { term: key, flags: flags } );
               }
             }
           }
           this.$root.invalidTag = invalidTag;
           this.query = '';
+          this.$emit('search');
         }
       }
     })
@@ -549,15 +551,14 @@
           document.documentElement.classList.remove("is-clipped");
           this.modal = null;
         },
-        search(term) {
+        add(term) {
           this.queries.add(term);
-          this.refresh();
         },
         remove(term) {
           this.queries.delete(term);
-          this.refresh();
+          this.search();
         },
-        refresh() {
+        search() {
           this.results = [];
           if (this.queries.size) {
             for (let group of this.groups) {
@@ -565,7 +566,12 @@
                 let match = true
                 let imageTags = new Set(image.tags);
                 for (let query of this.queries) {
-                  if (!imageTags.has(query)) {
+                  // not flag
+                  if (query.flags.not) {
+                    if (imageTags.has(query.term)) {
+                      match = false;
+                    }
+                  } else if (!imageTags.has(query.term)) {
                     match = false;
                   }
                 }
