@@ -40,14 +40,17 @@
         </nav>
         <div class="level">
           <div class="level-left">
-            <h1 class="title level-item">
-              Vampire Yuu Content
+            <div class="level-item">
+              <h1 class="title">Vampire Yuu Content</h1>
               <article class="message is-primary ml-4">
-                <div class="message-body">
+                <div v-show="!queries.size" class="message-body">
                   There are {{ count }} Vamp Yuus!
                 </div>
+                <div v-show="queries.size" class="message-body">
+                  Search results ({{ results.length }})
+                </div>
               </article>
-            </h1>
+            </div>
           </div>
           <div class="field level-right">
             <search-bar @search="search"></search-bar>
@@ -60,7 +63,7 @@
             <button class="delete is-small" @click="remove(query)"></button>
           </span>
         </div>
-        <div class="columns is-vcentered is-multiline">
+        <div class="columns is-vcentered is-multiline is-mobile is-variable is-1-mobile">
           <div v-for="image of results" class="column is-3">
             <div class="box image is-square hover" @click="openModal(image)">
               <img :src="image.src" class="cover-tile">
