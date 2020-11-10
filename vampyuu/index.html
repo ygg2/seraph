@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.min.css">
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <style>
     [v-cloak]   { display: none; }
@@ -40,7 +40,14 @@
         </nav>
         <div class="level">
           <div class="level-left">
-            <h1 class="title level-item">Vampire Yuu Content</h1>
+            <h1 class="title level-item">
+              Vampire Yuu Content
+              <article class="message is-primary ml-4">
+                <div class="message-body">
+                  There are {{ count }} Vamp Yuus!
+                </div>
+              </article>
+            </h1>
           </div>
           <div class="field level-right">
             <search-bar @search="search"></search-bar>
@@ -279,6 +286,7 @@
         return {
           query: '',
           aliases: new Map([
+            ['ana', /ana(?:hhzp|lazuli)/],
             ['beach', /\b:?wi:?\b|beach/],
             ['only yuu', /(?:only|just) yuu|yuu only/],
             ['mika', /mika(?:ela|yuu)?|yuumika/],
@@ -322,15 +330,29 @@
         queries: new Set(),
         results: [],
         invalidTag: false,
+        count: 0,
         // tags beach, only yuu, mika, vampire mika, reversal, 5 min, blood drinking, come crashing, cherry picking, color, lineless paper
         groups: [
           {
             name: 'General 5',
-            layout: 'box-layout-any',
+            layout: 'box-layout-7',
             images: [
               { src: 'motivationbutnot.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'halloweenvampmikayuu.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
               { src: 'throne.jpg', tags: ['mika', 'color', 'lineless paper'] },
-              { src: 'strengthtododishes.png', tags: ['only yuu', 'color', 'lineless paper'] }
+              { src: 'strengthtododishes.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'couragetodrawmika.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'ripp.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: '6_sucks.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'blood drinking'] }
+            ]
+          },
+          {
+            name: 'Challenge Challenge',
+            layout: 'box-layout-any',
+            images: [
+              { src: 'challenge_challenge.jpg', tags: ['only yuu', 'lineless paper' ]},
+              { src: 'soulmatecor.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'ana'] },
+              { src: 'zzz.jpg', tags: ['only yuu'] }
             ]
           },
           {
@@ -338,7 +360,7 @@
             layout: 'box-layout-6',
             images: [
               { src: 'vertical.png', tags: ['only yuu', 'color', 'lineless paper'] },
-              { src: 'kissu.jpg', tags: ['mika', 'vampire mika' ]},
+              { src: 'kissu.jpg', tags: ['mika', 'vampire mika' ] },
               { src: 'notbingo.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
               { src: 'blood_fountain.jpg', tags: ['mika', 'vampire mika', 'color', 'blood drinking', 'lineless paper'] },
               { src: 'hahahaha.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
@@ -412,8 +434,7 @@
               { src: '../bingo/april-2020/pining.png', tags: ['mika', 'reversal', 'color', 'lineless paper'] },
               { src: '../bingo/april-2020/divine.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
               { src: '../bingo/april-2020/bythebook.png', tags: ['mika', 'reversal', 'color', 'lineless paper'] },
-              { src: '../bingo/april-2020/artists.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
-
+              { src: '../bingo/april-2020/artists.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] }
             ]
           },
           {
@@ -569,6 +590,10 @@
         let targets = document.querySelectorAll('.group');
         for (let target of targets) {
           observer.observe(target);
+        }
+        // count
+        for (let group of this.groups) {
+          this.count += group.images.length;
         }
       }
     })
