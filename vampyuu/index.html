@@ -289,6 +289,7 @@
         return {
           query: '',
           aliases: new Map([
+            ['motivational', /motivational/],
             ['ana', /ana(?:hhzp|lazuli)/],
             ['beach', /\b:?wi:?\b|beach/],
             ['only yuu', /(?:only|just) yuu|yuu only/],
@@ -308,7 +309,7 @@
         search() {
           let query = this.query.toLowerCase();
           let invalidTag = true;
-          let flags = { not: query.startsWith('not') };
+          let flags = { not: query.startsWith('not ') };
           if (this.aliases.get(query)) {
             invalidTag = false;
             this.$emit('add-term', { term: query, flags: flags });
@@ -336,28 +337,39 @@
         results: [],
         invalidTag: false,
         count: 0,
-        // tags beach, only yuu, mika, vampire mika, reversal, 5 min, blood drinking, come crashing, cherry picking, color, lineless paper
+        // tags motivational, ana, beach, only yuu, mika, vampire mika, reversal, 5 min, blood drinking, come crashing, cherry picking, color, lineless paper
         groups: [
           {
-            name: 'General 5',
-            layout: 'box-layout-7',
+            name: 'General 7',
+            layout: 'box-layout-5',
             images: [
-              { src: 'motivationbutnot.png', tags: ['only yuu', 'color', 'lineless paper'] },
-              { src: 'halloweenvampmikayuu.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
-              { src: 'throne.jpg', tags: ['mika', 'color', 'lineless paper'] },
-              { src: 'strengthtododishes.png', tags: ['only yuu', 'color', 'lineless paper'] },
-              { src: 'couragetodrawmika.png', tags: ['only yuu', 'color', 'lineless paper'] },
-              { src: 'ripp.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
-              { src: '6_sucks.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'blood drinking'] }
+              { src: 'vampyuupromo.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'yeah.jpg', tags: ['only yuu', 'lineless paper'] },
+              { src: 'evaplshelp.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: '6_sucks.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'blood drinking'] },
+              { src: 'bunnyuubUTVAMP.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
             ]
           },
           {
-            name: 'Challenge Challenge',
-            layout: 'box-layout-any',
+            name: 'General 6',
+            layout: 'box-layout-6',
             images: [
-              { src: 'challenge_challenge.jpg', tags: ['only yuu', 'lineless paper' ]},
+              { src: 'throne.jpg', tags: ['mika', 'color', 'lineless paper'] },
+              { src: 'strengthtododishes.png', tags: ['only yuu', 'color', 'lineless paper', 'motivational'] },
+              { src: 'ripp.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'couragetodrawmika.png', tags: ['only yuu', 'color', 'lineless paper', 'motivational'] },
+              { src: 'energytomakebed.png', tags: ['only yuu', 'color', 'lineless paper', 'motivational'] },
               { src: 'soulmatecor.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'ana'] },
-              { src: 'zzz.jpg', tags: ['only yuu'] }
+            ]
+          },
+          {
+            name: 'General 5',
+            layout: 'box-layout-4',
+            images: [
+              { src: 'motivationbutnot.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'zzz.jpg', tags: ['only yuu'] },
+              { src: 'challenge_challenge.jpg', tags: ['only yuu', 'lineless paper' ]},
+              { src: 'halloweenvampmikayuu.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
             ]
           },
           {
