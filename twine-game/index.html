@@ -30,6 +30,12 @@ button {
   text-align: left;
 }
 
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
 .passage {
   padding: 1em 10%;
   font-family: 'Cardo', serif;
@@ -104,15 +110,57 @@ button {
   color: white;
 }
 
+.duck-duck-go {
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.search-bar {
+  box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  background-color: #fafafa;
+  padding: 16px;
+  display: flex;
+  border-radius: 4px 4px 0 0;
+}
+.search-bar .logo {
+  width: 36px;
+  height: 36px;
+  margin-right: 11px;
+  background-color: #de5833;
+  border-radius: 50%;
+}
+.search-bar p {
+  background-color: #fff;
+  height: 44px;
+  padding-left: 11px;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 2px 3px rgba(0,0,0,0.06);
+  flex-grow: 1;
+}
+
+.search-result {
+  padding: 32px 62px;
+}
+.search-result a:link {
+  color: #00278e;
+}
+.search-result a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .passage {
-	padding: 2em 3%;
+	padding: 3.5rem 3%;
+	font-size: 1rem;
+    line-height: 1.5rem;
   }
   #menu {
 	background: #6d5790;
 	width: 100%;
 	padding: .5em;
-	/* bottom shadow */
   }
   #menu button {
 	display: inline-block;
@@ -239,7 +287,8 @@ make_button('history', () => {
 	
 $(window).on('sm.checkpoint.added', (e, eObj) => {
 	breadcrumbs.checkpoint(eObj.name);
-});</script><tw-tag name="set" color="green"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="411,188" size="100,100">Every house had its lights off and the pier was empty save for a few birds. The moon sailed overhead, casting soft beams over the surface of the water. Deep beneath the waves, sleeping peacefully, was the kingdom of the vampire mers. *It was time.*
+	window.scrollTo(0, 0);
+});</script><tw-tag name="ending" color="blue"></tw-tag>,<tw-tag name="set" color="green"></tw-tag>,<tw-tag name="to-be-continued" color="red"></tw-tag><tw-passagedata pid="1" name="Start" tags="" position="411,189" size="100,100">Every house had its lights off and the pier was empty save for a few birds. The moon sailed overhead, casting soft beams over the surface of the water. Deep beneath the waves, sleeping peacefully, was the kingdom of the vampire mers. *It was time.*
 
 **13:00**
 
@@ -361,7 +410,7 @@ Now, how would Mika introduce himself...
 
 [[&quot;Hello naughty mermaid it&#39;s murder time&quot;-&gt;Hello naughty mermaid it&#39;s murder time]]
 
-[[&quot;Pleased to make your acquaintance.&quot;-&gt;Pleased to make your acquaintance.]]</tw-passagedata><tw-passagedata pid="9" name="headed down to the prisoner area." tags="" position="60,528" size="100,100">Mika opened the door to the prisoner area, only to get smacked in the face with a well-aimed punch.
+[[&quot;Pleased to make your acquaintance.&quot;-&gt;Pleased to make your acquaintance.]]</tw-passagedata><tw-passagedata pid="9" name="headed down to the prisoner area." tags="" position="38,513" size="100,100">Mika opened the door to the prisoner area, only to get smacked in the face with a well-aimed punch.
 
 When he recovered, he saw that the girl was not a child at all, but a short young woman...and that young woman was ready to attack again!
 
@@ -439,7 +488,7 @@ Mika angrily slapped the human. He smirked, but then felt a tug at his foot.
 
 They hit the water and the human let go of Mika who was absolutely speechless. He didn&#39;t know how to swim! He watched in despair as the human swam away, leaving him to drown. He clearly had not thought this through.
 
-He flailed his arms and legs, but to no avail. His heart sank as he himself sank [[into the depths of the ocean.]]</tw-passagedata><tw-passagedata pid="14" name="into the depths of the ocean." tags="" position="229,824" size="100,100">Mika had never taken swimming lessons because his home planet lacked water and he didn&#39;t look human enough to have swimming lessons on Earth. Still, he wished he had, because now he was going to die by drowning. He contemplated why aliens should need oxygen as he lost consciousness.
+He flailed his arms and legs, but to no avail. His heart sank as he himself sank [[into the depths of the ocean.]]</tw-passagedata><tw-passagedata pid="14" name="into the depths of the ocean." tags="to-be-continued" position="229,824" size="100,100">Mika had never taken swimming lessons because his home planet lacked water and he didn&#39;t look human enough to have swimming lessons on Earth. Still, he wished he had, because now he was going to die by drowning. He contemplated why aliens should need oxygen as he lost consciousness.
 
 ...
 
@@ -498,7 +547,21 @@ Mika sighed and facepalmed. Well, with any luck, this would mean it was easy to 
 	hurt: 1
   }
 ]
-)%&gt;</tw-passagedata><tw-passagedata pid="18" name="Pleased to make your acquaintance." tags="" position="865,409" size="100,100">&lt;a href=&quot;https://youtu.be/dQw4w9WgXcQ&quot;&gt;To be continued...&lt;/a&gt;</tw-passagedata><tw-passagedata pid="19" name="Yo." tags="" position="850,163" size="100,100">The prisoner just stared at him.
+)%&gt;</tw-passagedata><tw-passagedata pid="18" name="Pleased to make your acquaintance." tags="" position="865,409" size="100,100">&quot;I&#39;m Mika, proud owner of this fine ship and your host for a lovely vacation cruise.&quot;
+
+The mervamp grinned. &quot;Yo! You can call me Yuu.&quot;
+
+Mika was stunned. *He really bought that?*
+
+&quot;Nice ship,&quot; Yuu said, admiring the alien technology. &quot;I always wanted to know what it&#39;s like to get abducted by aliens. But you&#39;re way cooler than I thought! What are we gonna do?&quot;
+
+*Okay, so he didn&#39;t completely buy it, but...* &quot;Well, I was thinking we could...&quot;
+
+&lt;% if (window.story.state.has_child) { %&gt;
+[[Eat the child]]
+&lt;% } %&gt;
+
+[[Tour the world]]</tw-passagedata><tw-passagedata pid="19" name="Yo." tags="" position="850,163" size="100,100">The prisoner just stared at him.
 
 Mika stared back.
 
@@ -512,11 +575,78 @@ Ferid tapped his chin. &quot;Hmm...how &#39;bout seeing how the tractor beam wor
 
 &quot;What a fantastic request,&quot; Mika thought aloud. He opened the hatch and led his new assistant to the room.
 
-But the moment he opened the door, the human pushed him out of the ship! Stunned, regretting all his life choices, he [[splashed into the waves.-&gt;into the depths of the ocean.]]</tw-passagedata><tw-passagedata pid="21" name="Defeated Yuu" tags="" position="1047,232" size="100,100">You defeated Yuu in battle!
+But the moment he opened the door, the human pushed him out of the ship! Stunned, regretting all his life choices, he [[splashed into the waves.-&gt;into the depths of the ocean.]]</tw-passagedata><tw-passagedata pid="21" name="Defeated Yuu" tags="" position="1047,231" size="100,100">&quot;Serves you right!&quot; Mika cackled as the mervamp fell to his kn...tail or something. &quot;I&#39;ll serve you now, as my next meal!&quot; He was enthusiastic to try a new food.
 
-&lt;a href=&quot;https://youtu.be/dQw4w9WgXcQ&quot;&gt;To be continued...&lt;/a&gt;</tw-passagedata><tw-passagedata pid="22" name="Defeated by Yuu" tags="" position="1046,346" size="100,100">You were defeated by Yuu in battle.
+&quot;Oh no you don&#39;t!&quot;
 
-&lt;a href=&quot;https://youtu.be/dQw4w9WgXcQ&quot;&gt;To be continued...&lt;/a&gt;</tw-passagedata></tw-storydata>
+Before Mika could even respond, the other launched himself forward and sank his fangs into Mika&#39;s leg. &quot;*Ouch!* You ankle-biter!&quot; he accused with precision, but now instead the mervamp had both webbed hands gripping his ankle.
+
+There was only one thing he could use to defend himself now.
+
+[[HIS PET KITTEN]]
+
+[[THE SPOON]]</tw-passagedata><tw-passagedata pid="22" name="Defeated by Yuu" tags="" position="1046,346" size="100,100">Someone who could defeat him, a master, in a battle of puns?! Mika was enamored.
+
+Luckily, being the alien he was, and in his home territory, he quickly recovered and made peace with his opponent.
+
+**GOOD END (1)**
+
+&lt;img src=&quot;https://pbs.twimg.com/media/EcsHaDwWAAM7z50?format=png&amp;name=small&quot;&gt;</tw-passagedata><tw-passagedata pid="23" name="Eat the child" tags="" position="963,538" size="100,100">&quot;How do you cook a child from frozen?&quot; Mika wondered, reaching for his phone. He opened a browser, typed his query, and-
+
+&quot;STOP!&quot; screamed Yuu. Mika was so startled, he dropped the phone, which Yuu immediately swiped. Mika internally bonked his head. Why had he thought his captive wouldn&#39;t mind his favorite food?
+
+&quot;You have to use DuckDuckGo for these kinds of things,&quot; Yuu said, self-assured, punching in the address and searching for recipes. Mika just stared.
+
+&lt;div class=&quot;duck-duck-go&quot;&gt;
+
+&lt;div class=&quot;search-bar&quot;&gt;
+&lt;span class=&quot;logo&quot;&gt;&lt;/span&gt;
+&lt;p&gt;how to cook a frozen child&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;search-result&quot;&gt;
+[[Baked Kiddo]]
+&lt;p&gt;A crunchy and flavorful recipe.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;search-result&quot;&gt;
+[[Child Smoothie]]
+&lt;p&gt;The best human smoothie you&#39;ll ever taste!&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="Baked Kiddo" tags="ending" position="1113,613" size="100,100">Sadly, the microwave on board wasn&#39;t large enough to fit the whole child in.
+
+&quot;It&#39;s alright, we can use the stove,&quot; Yuu assured Mika.
+
+Mika was skeptical. &quot;You have stoves underwater?&quot;
+
+&quot;...I thought you would know how to use it.&quot;
+
+In the end, they managed to cook the kid with minimal burning. Never underestimate the powers of stoves, the internet, and DuckDuckGo.
+
+**GOOD END (2)**</tw-passagedata><tw-passagedata pid="25" name="Child Smoothie" tags="ending" position="1113,489" size="100,100">Mika was overjoyed to share a meal with someone for the first time in many years, even though Yuu could only drink the blood while Mika enjoyed a smoothie.
+
+They had a feast and looked forward to searching the land together for food.
+
+**GOOD END (1)**</tw-passagedata><tw-passagedata pid="26" name="HIS PET KITTEN" tags="" position="1164,162" size="100,100">Mika screeched as loudly as he could. As he expected, his pet kitten came running. The mervamp immediately let go of his leg to catch the kitten who hopped into his arms. Mika was filled with a sense of triumph.
+
+&quot;Aww!&quot; his foe cooed, seemingly reenergized. &quot;I didn&#39;t expect someone like you to have such a cute pet!&quot;
+
+Mika&#39;s heart sank.
+
+&quot;In fact,&quot; the mervamp went on, &quot;want to see my pet, too?&quot;
+
+[[&quot;NO!&quot;-&gt;NO]]</tw-passagedata><tw-passagedata pid="27" name="THE SPOON" tags="ending" position="1166,282" size="100,100">Determined, Mika dragged himself, and the mervamp holding on with all his strength, toward hope: the silverware drawer. He yanked the handle and removed a single spoon from the drawer. With utter confidence, he brought the spoon right to the mervamp&#39;s face!
+
+The mervamp was thoroughly killed by the silver, and the spoon&#39;s power was so great, Mika also died. Forever. Because yes.
+
+**BAD END (2)**
+
+&lt;img src=&quot;https://pbs.twimg.com/media/EddFvfLWAAEkOV1?format=jpg&amp;name=small&quot;&gt;</tw-passagedata><tw-passagedata pid="28" name="NO" tags="ending" position="1289,120" size="100,100">But it was too late. The mervamp whipped out his pet t-t-*turtle* which scared Mika.
+
+To death.
+
+**BAD END (1)**</tw-passagedata><tw-passagedata pid="29" name="Tour the world" tags="to-be-continued" position="762,538" size="100,100">&lt;a href=&quot;https://youtu.be/GHMjD0Lp5DY&quot;&gt;To be continued...&lt;/a&gt;</tw-passagedata></tw-storydata>
 		<script>
 		(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 "use strict";window.either=function(){for(var n=[],t=0;t<arguments.length;t++)if(arguments[t]instanceof Array)for(var r=0;r<arguments[t].length;r++)n.push(arguments[t][r]);else n.push(arguments[t]);return n[_.random(n.length-1)]},window.hasVisited=function(){var n=null;if(1==arguments.length)return null!=(n=window.story.passage(arguments[0]))&&window.story.history.includes(n.id);for(var t=0;t<arguments.length;t++)if(null==(n=window.story.passage(arguments[t]))||0==window.story.history.includes(n.id))return!1;return!0},window.visited=function(){for(var n=[],t=[],r=0;r<arguments.length;r++){var e=window.story.passage(arguments[r]);null!=e&&(t=window.story.history.filter(function(n){return n==e.id})),n.push(t.length)}return Math.min.apply(Math,n)},window.renderToSelector=function(n,t){var r=window.story.passage(t);null!=r&&$(n).html(r.render())},window.getStyles=function(){return $.when.apply($,$.map(arguments,function(n){return $.get(n,function(n){$("<style>"+n+"</style>").appendTo("head")})}))};
