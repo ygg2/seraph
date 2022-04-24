@@ -159,6 +159,37 @@
       `
     })
 
+    Vue.component('box-layout-5', {
+      props: {
+        images: Array
+      },
+      template: `
+      <div class="tile is-ancestor">
+        <div class="tile is-9 is-vertical">
+          <div class="tile">
+            <div class="tile is-parent is-8">
+              <image-box :src="images[0]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[1]"></image-box>
+            </div>
+          </div>
+          <div class="tile">
+            <div class="tile is-parent is-4">
+              <image-box :src="images[2]"></image-box>
+            </div>
+            <div class="tile is-parent">
+              <image-box :src="images[3]"></image-box>
+            </div>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <image-box :src="images[4]"></image-box>
+        </div>
+      </div>
+      `
+    })
+
     Vue.component('box-layout-6', {
       props: {
         images: Array
@@ -195,33 +226,12 @@
       `
     })
 
-    Vue.component('box-layout-5', {
+    Vue.component('box-layout-6-alt', {
       props: {
         images: Array
       },
       template: `
       <div class="tile is-ancestor">
-        <div class="tile is-9 is-vertical">
-          <div class="tile">
-            <div class="tile is-parent is-8">
-              <image-box :src="images[0]"></image-box>
-            </div>
-            <div class="tile is-parent">
-              <image-box :src="images[1]"></image-box>
-            </div>
-          </div>
-          <div class="tile">
-            <div class="tile is-parent is-4">
-              <image-box :src="images[2]"></image-box>
-            </div>
-            <div class="tile is-parent">
-              <image-box :src="images[3]"></image-box>
-            </div>
-          </div>
-        </div>
-        <div class="tile is-parent">
-          <image-box :src="images[4]"></image-box>
-        </div>
       </div>
       `
     })
@@ -337,16 +347,51 @@
         results: [],
         invalidTag: false,
         count: 0,
+        // box layout 6 has an alt
         // tags motivational, ana, beach, only yuu, mika, vampire mika, reversal, 5 min, blood drinking, come crashing, cherry picking, color, lineless paper
         groups: [
           {
-            name: 'General 8',
+            name: 'General 9',
+            layout: 'box-layout-5',
+            images: [
+              { src: 'vampyuuannouncement2021.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'hugs.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'hugs2.png', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+              { src: 'maybe.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'edgy.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
+            ]
+          },
+          {
+            name: 'Vamp Yuu Weekend 2021',
+            layout: 'box-layout-any',
+            images: [
+              { src: 'bunny.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'kitty.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'bat.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'MouSePAINT.png', tags: ['only yuu', 'color', 'lineless paper'] },
+            ]
+          },
+          {
+            name: 'General 9',
             layout: 'box-layout-4',
             images: [
+              { src: 'phone.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'yetanothervampyuu.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'vampyuupropaganda.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'strawberrylemonade.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper', 'blood drinking'] },
+            ]
+          },
+          {
+            name: 'General 8',
+            layout: 'box-layout-6-alt',
+            images: [
+              { src: 'nvmy.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'vampyuusuperior.jpg', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'internationalvampyuuday.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
               { src: 'vampyuu.png', tags: ['only yuu', 'color', 'lineless paper'] },
               { src: 'vampyuubutmore.png', tags: ['only yuu', 'color', 'lineless paper'] },
-              { src: 'internationalvampyuuday.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
-              { src: 'vampyuusuperior.jpg', tags: ['only yuu', 'color', 'lineless paper'] }
+              { src: 'vampyuuisbest.png', tags: ['only yuu', 'color', 'lineless paper'] },
+              { src: 'vampmikayuu.jpg', tags: ['mika', 'vampire mika', 'color', 'lineless paper'] },
             ]
           },
           {
